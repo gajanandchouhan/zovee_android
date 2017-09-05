@@ -12,8 +12,10 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.viewpagerindicator.CirclePageIndicator;
 import com.zoho.app.R;
 import com.zoho.app.activity.ShowMoreActivity;
+import com.zoho.app.custom.AutoScrollViewPager;
 import com.zoho.app.model.response.CategoryModel;
 import com.zoho.app.utils.ConstantLib;
 import com.zoho.app.utils.Utils;
@@ -124,9 +126,15 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
+        AutoScrollViewPager autoScrollViewPager;
+        CirclePageIndicator indicator;
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
+            autoScrollViewPager = (AutoScrollViewPager) itemView.findViewById(R.id.autoPager);
+            autoScrollViewPager.setAdapter(new BannerPagerAdapter(mContext, itemList.get(0).getMasterBanners()));
+            indicator = (CirclePageIndicator) itemView.findViewById(R.id.indicator);
+            indicator.setViewPager(autoScrollViewPager);
         }
     }
 
