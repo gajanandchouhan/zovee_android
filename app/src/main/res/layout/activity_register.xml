@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp">
+
+
+        <com.zoho.app.custom.CircleImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/_15sdp"
+            android:src="@color/colorPrimary"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="2dp" />
+
+        <ImageView
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@android:drawable/ic_menu_camera" />
+    </RelativeLayout>
+
+    <com.zoho.app.custom.RobotoRegularEditText
+        android:id="@+id/et_name"
+        style="@style/EditTextStyle"
+        android:hint="@string/firstname"
+        android:inputType="textPersonName"
+        android:maxLines="1" />
+
+    <com.zoho.app.custom.RobotoRegularEditText
+        android:id="@+id/et_lastname"
+        style="@style/EditTextStyle"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="@string/lastname"
+        android:inputType="textPersonName"
+        android:maxLines="1" />
+
+    <com.zoho.app.custom.RobotoLightEditText
+        android:id="@+id/et_companyName"
+        style="@style/EditTextStyle"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="@string/companyName"
+        android:inputType="textPersonName"
+        android:imeOptions="actionNext"
+        android:maxLines="1" />
+
+    <com.zoho.app.custom.RobotoLightEditText
+        android:id="@+id/et_email"
+        style="@style/EditTextStyle"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1" />
+
+    <RelativeLayout
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/button_bg"
+        android:padding="@dimen/_10sdp">
+
+        <com.zoho.app.custom.RobotoRegularTextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/get_started"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp" />
+
+        <ProgressBar
+            android:id="@+id/loading"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/textView"
+            android:layout_toRightOf="@+id/textView"
+            android:padding="10dp"
+            android:theme="@style/AppTheme.WhiteAccent"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <com.zoho.app.custom.RobotoRegularEditText
+        android:id="@+id/et_que"
+        android:maxLines="6"
+        android:minLines="6"
+        style="@style/EditTextStyle"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:gravity="start"
+        android:hint="@string/write_que"
+         />
+
+    <com.zoho.app.custom.RobotoMediumButton
+        android:id="@+id/btn_rfer"
+        style="@style/ButtonStyle"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/send" />
+</LinearLayout>
