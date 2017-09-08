@@ -132,6 +132,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         public HeaderViewHolder(View itemView) {
             super(itemView);
             autoScrollViewPager = (AutoScrollViewPager) itemView.findViewById(R.id.autoPager);
+            autoScrollViewPager.startAutoScroll();
+            autoScrollViewPager.setInterval(3000);
+            autoScrollViewPager.setCycle(true);
+            autoScrollViewPager.setStopScrollWhenTouch(true);
             autoScrollViewPager.setAdapter(new BannerPagerAdapter(mContext, itemList.get(0).getMasterBanners()));
             indicator = (CirclePageIndicator) itemView.findViewById(R.id.indicator);
             indicator.setViewPager(autoScrollViewPager);
