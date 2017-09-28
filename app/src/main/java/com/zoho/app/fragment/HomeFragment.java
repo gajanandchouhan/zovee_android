@@ -15,6 +15,7 @@ import com.zoho.app.R;
 import com.zoho.app.adapter.MainAdapter;
 import com.zoho.app.custom.CustomProgressDialog;
 import com.zoho.app.model.response.CategoryModel;
+import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.presentor.HomePresentor;
 import com.zoho.app.utils.FilterDialog;
 import com.zoho.app.view.HomeView;
@@ -89,7 +90,8 @@ public class HomeFragment extends Fragment implements HomeView {
             FilterDialog filterDialog = new FilterDialog(getActivity(), categoryList, new FilterDialog.OnCategorySelectedListner() {
                 @Override
                 public void onCategorySelected(List<CategoryModel> selectedList) {
-
+                    PrefManager.getInstance(getActivity()).saveSelectedList(selectedList);
+                    setAdapter(categoryList);
                 }
             });
             filterDialog.show();

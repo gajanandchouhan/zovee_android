@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import com.zoho.app.R;
 import com.zoho.app.adapter.FilterCategoryAdapterAdapter;
 import com.zoho.app.model.response.CategoryModel;
+import com.zoho.app.perisistance.PrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,16 @@ public class FilterDialog extends Dialog {
         getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        List<CategoryModel> selectedCategoryList = PrefManager.getInstance(mContext).getSelectedCategoryList();
+        for (CategoryModel categoryModel : categoryList) {
+            String categoryName = categoryModel.getCategoryName();
+            for (CategoryModel model : selectedCategoryList) {
+                if (model.getCategoryName().equals(categoryName)) {
+                    categoryModel.setSelected(true);
+                }
+            }
+
+        }
         adapterAdapter = new FilterCategoryAdapterAdapter(mContext, categoryList);
         recyclerView.setAdapter(adapterAdapter);
         findViewById(R.id.textView_cancel).setOnClickListener(new View.OnClickListener() {

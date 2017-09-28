@@ -17,6 +17,7 @@ import com.zoho.app.R;
 import com.zoho.app.activity.ShowMoreActivity;
 import com.zoho.app.custom.AutoScrollViewPager;
 import com.zoho.app.model.response.CategoryModel;
+import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.utils.ConstantLib;
 import com.zoho.app.utils.Utils;
 
@@ -38,7 +39,22 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         this.mContext = mContext;
         this.itemList = itemList;
         filteredList = new ArrayList<>();
-        filteredList.addAll(itemList);
+        // filteredList.addAll(itemList);
+
+        List<CategoryModel> selectedCategoryList = PrefManager.getInstance(mContext).getSelectedCategoryList();
+        if (selectedCategoryList != null && selectedCategoryList.size() > 0) {
+            for (CategoryModel o : this.itemList) {
+                String categoryName = o.getCategoryName();
+                for (CategoryModel categoryModel : selectedCategoryList) {
+                    if (categoryModel.getCategoryName().equals(categoryName)) {
+                        filteredList.add(o);
+                    }
+                }
+
+            }
+        } else {
+            filteredList.addAll(itemList);
+        }
         filteredList.add(0, null);
     }
 
