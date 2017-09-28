@@ -47,14 +47,16 @@ public class FilterDialog extends Dialog {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         List<CategoryModel> selectedCategoryList = PrefManager.getInstance(mContext).getSelectedCategoryList();
-        for (CategoryModel categoryModel : categoryList) {
-            String categoryName = categoryModel.getCategoryName();
-            for (CategoryModel model : selectedCategoryList) {
-                if (model.getCategoryName().equals(categoryName)) {
-                    categoryModel.setSelected(true);
+        if (selectedCategoryList != null) {
+            for (CategoryModel categoryModel : categoryList) {
+                String categoryName = categoryModel.getCategoryName();
+                for (CategoryModel model : selectedCategoryList) {
+                    if (model.getCategoryName().equals(categoryName)) {
+                        categoryModel.setSelected(true);
+                    }
                 }
-            }
 
+            }
         }
         adapterAdapter = new FilterCategoryAdapterAdapter(mContext, categoryList);
         recyclerView.setAdapter(adapterAdapter);
