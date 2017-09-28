@@ -50,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     private File profilePath;
     private String imagepath;
     private Uri uriImagePath;
+    private ImageView backImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,14 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
         cameraImageView = (ImageView) findViewById(R.id.camera);
         profileImageView = (ImageView) findViewById(R.id.imageView);
-
+        backImageView = (ImageView) findViewById(R.id.back_imageView);
+        backImageView.setVisibility(View.VISIBLE);
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

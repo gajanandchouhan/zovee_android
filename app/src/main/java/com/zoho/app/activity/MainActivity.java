@@ -2,6 +2,7 @@ package com.zoho.app.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,7 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerClickListener {
+public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerClickListener, View.OnClickListener {
     Toolbar toolbar;
     DrawerLayout mDrawerLayout;
     RecyclerView mDrawerList;
@@ -58,11 +59,13 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
     //SearchView searchView;
     int currentpos = 0;
     LinearLayout layoutDrawer;
-   // MenuItem myActionMenuItem;
+    // MenuItem myActionMenuItem;
     private boolean doubleBackToExitPressedOnce = false;
     TextView toolbarTitle, welcomeTextView;
     private ImageView backImageView, profileImageView;
     TextView charTextView;
+
+    ImageView imageViewFilter, imageViewNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,13 +96,23 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
         welcomeTextView = (TextView) findViewById(R.id.textView_welcome);
         layoutDrawer = (LinearLayout) findViewById(R.id.layout_drawer);
+        imageViewFilter = (ImageView) findViewById(R.id.filter_imageView);
+        imageViewNotification = (ImageView) findViewById(R.id.notification_imageView);
+        imageViewNotification.setVisibility(View.VISIBLE);
+        imageViewFilter.setVisibility(View.VISIBLE);
+        imageViewFilter.setOnClickListener(this);
+        imageViewNotification.setOnClickListener(this);
         mDrawerList.setLayoutManager(new LinearLayoutManager(this));
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()/*.addTestDevice("8844CD2195B98FF0C61FE1C753070338")*/.build();
         mAdView.loadAd(adRequest);
         String name = PrefManager.getInstance(this).getString(PrefConstants.NAME); /*+ " " + PrefManager.getInstance(this).getString(PrefConstants.LASTNAME);*/
+        if (name.length() == 0) {
+            name = "Guest";
+        }
         name = name.substring(0, 1).toUpperCase() + name.substring(1);
         welcomeTextView.setText(String.format(getString(R.string.welcome_msg), name));
+
         File file = new File(ConstantLib.PROFILE_PIC_PATH);
         if (file.exists()) {
             charTextView.setVisibility(View.GONE);
@@ -196,7 +209,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
             return;
         }
         currentpos = position;
-      //  myActionMenuItem.setVisible(false);
+        //  myActionMenuItem.setVisible(false);
         if (position != 2 && position != 5) {
             adapter.setSelectedPosition(position);
             adapter.notifyDataSetChanged();
@@ -208,7 +221,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
                 backImageView.setVisibility(View.GONE);
                 pushFragments(new HomeFragment());
-               // myActionMenuItem.setVisible(true);
+                // myActionMenuItem.setVisible(true);
                 break;
             case 1:
                 actionBar.setDisplayHomeAsUpEnabled(false);
@@ -218,8 +231,8 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 pushFragments(new AskQuestionFragment());
                 break;
             case 2:
-              //  if (getCurrentFragment() instanceof HomeFragment)
-                   // myActionMenuItem.setVisible(true);
+                //  if (getCurrentFragment() instanceof HomeFragment)
+                // myActionMenuItem.setVisible(true);
                 shareApp();
                 break;
             case 3:
@@ -238,7 +251,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 break;
             case 5:
                 //if (getCurrentFragment() instanceof HomeFragment)
-                  //  myActionMenuItem.setVisible(true);
+                //  myActionMenuItem.setVisible(true);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ConstantLib.APP_URL));
                 startActivity(browserIntent);
                 break;
@@ -278,7 +291,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
             actionBar.setDisplayHomeAsUpEnabled(true);
             backImageView.setVisibility(View.GONE);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
-           // myActionMenuItem.setVisible(true);
+            // myActionMenuItem.setVisible(true);
             currentpos = 0;
             adapter.setSelectedPosition(0);
             adapter.notifyDataSetChanged();
@@ -299,5 +312,19 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.filter_imageView:
+                Fragment currentFragment = getCurrentFragment();
+                if (currentFragment instanceof HomeFragment) {
+                    ((HomeFragment) currentFragment).showFilter();
+                }
+                break;
+            case R.id.notification_imageView:
+                break;
+        }
     }
 }

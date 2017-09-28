@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zoho.app.custom.RobotoLightEditText
+        android:id="@+id/et_email"
+        style="@style/EditTextStyle"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1" />
+
+    <com.zoho.app.custom.RobotoLightEditText
+        android:id="@+id/et_pass"
+        style="@style/EditTextStyle"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:maxLines="1" />
+
+    <RelativeLayout
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/button_bg"
+        android:padding="@dimen/_10sdp">
+
+        <com.zoho.app.custom.RobotoRegularTextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp" />
+
+        <ProgressBar
+            android:id="@+id/loading"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/textView"
+            android:layout_toRightOf="@+id/textView"
+            android:padding="10dp"
+            android:theme="@style/AppTheme.WhiteAccent"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <com.zoho.app.custom.RobotoMediumTextView
+        android:id="@+id/textView_forgot_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:onClick="onForgot"
+        android:text="@string/forgot_pass"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_14sdp" />
+
+    <com.zoho.app.custom.RobotoMediumTextView
+        android:id="@+id/textView_new_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:onClick="onNewUser"
+        android:text="@string/new_user"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_14sdp" />
+</LinearLayout>

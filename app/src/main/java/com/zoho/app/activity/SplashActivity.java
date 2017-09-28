@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     public void navigateToNextActivty() {
         if (PrefManager.getInstance(this).getString(PrefConstants.NAME).equals("")) {
-            Utils.startActivity(this, RegisterActivity.class, null);
+            Utils.startActivity(this, LoginActivity.class, null);
         } else {
             Utils.startActivity(this, MainActivity.class, null);
         }

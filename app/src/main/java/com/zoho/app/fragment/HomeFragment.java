@@ -16,6 +16,7 @@ import com.zoho.app.adapter.MainAdapter;
 import com.zoho.app.custom.CustomProgressDialog;
 import com.zoho.app.model.response.CategoryModel;
 import com.zoho.app.presentor.HomePresentor;
+import com.zoho.app.utils.FilterDialog;
 import com.zoho.app.view.HomeView;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class HomeFragment extends Fragment implements HomeView {
     private MainAdapter adapter;
     private View view;
     private HomePresentor presentor;
+    private List<CategoryModel> categoryList;
 
     @Nullable
     @Override
@@ -65,6 +67,7 @@ public class HomeFragment extends Fragment implements HomeView {
     @Override
     public void setCategoryList(List<CategoryModel> categoryList) {
         if (categoryList != null && categoryList.size() > 0) {
+            this.categoryList = categoryList;
             setAdapter(categoryList);
         }
     }
@@ -79,5 +82,17 @@ public class HomeFragment extends Fragment implements HomeView {
 
     public void filterCategoryList(CharSequence text) {
         adapter.getFilter().filter(text);
+    }
+
+    public void showFilter() {
+        if (categoryList != null && categoryList.size() > 0) {
+            FilterDialog filterDialog = new FilterDialog(getActivity(), categoryList, new FilterDialog.OnCategorySelectedListner() {
+                @Override
+                public void onCategorySelected(List<CategoryModel> selectedList) {
+
+                }
+            });
+            filterDialog.show();
+        }
     }
 }

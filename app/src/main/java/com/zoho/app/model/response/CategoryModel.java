@@ -11,6 +11,7 @@ public class CategoryModel implements Serializable {
     private String CategoryName;
     private List<SubCategoryModel> SubCategoryList;
     private List<String> MasterBanners;
+    private boolean isSelected;
 
     public void setCategoryName(String categoryName) {
         CategoryName = categoryName;
@@ -34,5 +35,13 @@ public class CategoryModel implements Serializable {
 
     public List<String> getMasterBanners() {
         return MasterBanners;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
     }
 }
