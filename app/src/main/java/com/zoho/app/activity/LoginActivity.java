@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onForgot(View view) {
-
+        startActivity(new Intent(this, ForgotPasswordActivity.class));
     }
 
     public void onNewUser(View view) {

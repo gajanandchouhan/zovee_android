@@ -10,4 +10,5 @@ public interface PrefConstants {
     String LASTNAME = "contact";
     String COMPANY = "company";
     String EMAIL = "email";
+    String DEVICE_TOKEN = "device_token";
 }
