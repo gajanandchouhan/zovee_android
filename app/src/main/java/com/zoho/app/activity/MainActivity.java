@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
     private ImageView backImageView, profileImageView;
     TextView charTextView;
 
-    ImageView imageViewFilter, imageViewNotification;
+    ImageView imageViewFilter, imageViewNotification,imageViewSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +93,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         charTextView = (TextView) findViewById(R.id.textView_char);
         backImageView = (ImageView) findViewById(R.id.back_imageView);
         profileImageView = (ImageView) findViewById(R.id.imageView);
+        imageViewSearch = (ImageView) findViewById(R.id.search_imageView);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
         welcomeTextView = (TextView) findViewById(R.id.textView_welcome);
         layoutDrawer = (LinearLayout) findViewById(R.id.layout_drawer);
@@ -102,6 +103,8 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         imageViewFilter.setVisibility(View.VISIBLE);
         imageViewFilter.setOnClickListener(this);
         imageViewNotification.setOnClickListener(this);
+        imageViewSearch.setOnClickListener(this);
+        imageViewSearch.setVisibility(View.VISIBLE);
         mDrawerList.setLayoutManager(new LinearLayoutManager(this));
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()/*.addTestDevice("8844CD2195B98FF0C61FE1C753070338")*/.build();
@@ -135,6 +138,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         drawerItemList.add(new DrawerItem(getString(R.string.help), R.drawable.help_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.share), R.drawable.share_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.feedback), R.drawable.feedback_selector));
+        drawerItemList.add(new DrawerItem(getString(R.string.setting), R.drawable.feedback_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.about_us), R.drawable.about_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.rate_us), R.drawable.rate_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.dev_desk), R.drawable.developer_desk_selector));
@@ -196,6 +200,11 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
     }
 
     public void pushFragments(Fragment fragment) {
+        if (fragment instanceof HomeFragment) {
+            imageViewFilter.setVisibility(View.VISIBLE);
+        } else {
+            imageViewFilter.setVisibility(View.GONE);
+        }
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
         ft.replace(R.id.frame, fragment);
@@ -210,7 +219,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         }
         currentpos = position;
         //  myActionMenuItem.setVisible(false);
-        if (position != 2 && position != 5) {
+        if (position != 2 && position != 6) {
             adapter.setSelectedPosition(position);
             adapter.notifyDataSetChanged();
         }
@@ -242,25 +251,32 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 toolbarTitle.setText(getString(R.string.feedback));
                 pushFragments(new FeedbackFragment());
                 break;
-            case 4:
+            case 5:
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setHomeAsUpIndicator(null);
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.about_us));
                 pushFragments(new AboutUsFragment());
                 break;
-            case 5:
+            case 6:
                 //if (getCurrentFragment() instanceof HomeFragment)
                 //  myActionMenuItem.setVisible(true);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ConstantLib.APP_URL));
                 startActivity(browserIntent);
                 break;
-            case 6:
+            case 7:
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setHomeAsUpIndicator(null);
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.dev_desk));
-                pushFragments(new DeveloperDeskFragment());
+               pushFragments(new DeveloperDeskFragment());
+                break;
+            case 4:
+                actionBar.setDisplayHomeAsUpEnabled(false);
+                actionBar.setHomeAsUpIndicator(null);
+                backImageView.setVisibility(View.VISIBLE);
+                toolbarTitle.setText(getString(R.string.setting));
+                pushFragments(new AboutUsFragment());
                 break;
         }
     }
@@ -324,6 +340,9 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 }
                 break;
             case R.id.notification_imageView:
+                break;
+            case R.id.search_imageView:
+                startActivity(new Intent(this,SearchActivity.class));
                 break;
         }
     }

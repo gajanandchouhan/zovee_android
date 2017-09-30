@@ -49,4 +49,5 @@
     <string name="forgot_pass">Forgot Passowrd ?</string>
     <string name="new_user">New to ZoVee singup here.</string>
     <string name="password_empty">Please enter password.</string>
+    <string name="setting">Setting</string>
 </resources>

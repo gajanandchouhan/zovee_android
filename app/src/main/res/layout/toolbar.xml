@@ -59,5 +59,14 @@
             android:layout_gravity="right"
             android:src="@drawable/filter"
             android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/search_imageView"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/icon_search"
+            android:visibility="gone" />
     </android.support.v7.widget.Toolbar>
 </LinearLayout>
