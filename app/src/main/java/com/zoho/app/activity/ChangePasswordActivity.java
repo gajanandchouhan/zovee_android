@@ -17,6 +17,7 @@ import com.zoho.app.model.request.ChangePasswordRequestModel;
 import com.zoho.app.model.response.BaseResponseModel;
 import com.zoho.app.model.response.VideoListModel;
 import com.zoho.app.netcom.ApiClient;
+import com.zoho.app.netcom.CheckNetworkState;
 import com.zoho.app.perisistance.PrefConstants;
 import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.utils.ConstantLib;
@@ -63,6 +64,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void changePassword() {
+        if (!CheckNetworkState.isOnline(this)) {
+            Utils.showToast(this, getString(R.string.no_internet));
+            return;
+        }
         String oldPass = editTextOldPass.getText().toString().trim();
         String newPass = editTextNewPass.getText().toString().trim();
         String confirmNewPass = editTextConformNewPass.getText().toString().trim();

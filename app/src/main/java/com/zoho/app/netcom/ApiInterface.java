@@ -15,6 +15,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -33,7 +34,8 @@ public interface ApiInterface {
 
     @POST("getVideoDetails")
     Call<VideoDetailsResponseModel> getVideoDetails(@Body IdViewModel idViewModel);
-//Multipart params :- FirstName,LastName,Email,Password,CompanyName,ProfilePicture
+
+    //Multipart params :- FirstName,LastName,Email,Password,CompanyName,ProfilePicture
     @Multipart
     @POST("signUp")
     Call<SignupResponseModel> doSignup(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,
