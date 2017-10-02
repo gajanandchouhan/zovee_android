@@ -50,4 +50,14 @@
     <string name="new_user">New to ZoVee singup here.</string>
     <string name="password_empty">Please enter password.</string>
     <string name="setting">Setting</string>
+    <string name="select_image">Please pick a profile image.</string>
+    <string name="enter_password">Please enter password.</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new">Confirm New Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="enter_old_pass">Please enter your old password.</string>
+    <string name="enter_new_pass">Please enter new password.</string>
+    <string name="enter_confirm_new_pass">Please enter confirm new password</string>
+    <string name="password_not_match">Password is not matching.</string>
 </resources>

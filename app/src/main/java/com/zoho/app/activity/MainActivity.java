@@ -35,6 +35,7 @@ import com.zoho.app.fragment.DeveloperDeskFragment;
 import com.zoho.app.fragment.FeedbackFragment;
 import com.zoho.app.fragment.HomeFragment;
 import com.zoho.app.fragment.AskQuestionFragment;
+import com.zoho.app.fragment.SettingFragment;
 import com.zoho.app.model.DrawerItem;
 import com.zoho.app.netcom.CheckNetworkState;
 import com.zoho.app.perisistance.PrefConstants;
@@ -65,7 +66,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
     private ImageView backImageView, profileImageView;
     TextView charTextView;
 
-    ImageView imageViewFilter, imageViewNotification,imageViewSearch;
+    ImageView imageViewFilter, imageViewNotification, imageViewSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,14 +116,13 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         }
         name = name.substring(0, 1).toUpperCase() + name.substring(1);
         welcomeTextView.setText(String.format(getString(R.string.welcome_msg), name));
-
-        File file = new File(ConstantLib.PROFILE_PIC_PATH);
-        if (file.exists()) {
-            charTextView.setVisibility(View.GONE);
-            Picasso.with(this).load(file).into(profileImageView);
-        } else {
+        String img = PrefManager.getInstance(this).getString(PrefConstants.IMAGE);
+        if (img.equals("")) {
             charTextView.setText("" + name.charAt(0));
+        } else {
+            Picasso.with(this).load(img).into(profileImageView);
         }
+
         backImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -269,14 +269,14 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 actionBar.setHomeAsUpIndicator(null);
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.dev_desk));
-               pushFragments(new DeveloperDeskFragment());
+                pushFragments(new DeveloperDeskFragment());
                 break;
             case 4:
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setHomeAsUpIndicator(null);
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.setting));
-                pushFragments(new AboutUsFragment());
+                pushFragments(new SettingFragment());
                 break;
         }
     }
@@ -342,7 +342,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
             case R.id.notification_imageView:
                 break;
             case R.id.search_imageView:
-                startActivity(new Intent(this,SearchActivity.class));
+                startActivity(new Intent(this, SearchActivity.class));
                 break;
         }
     }

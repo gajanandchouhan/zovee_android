@@ -11,4 +11,6 @@ public interface PrefConstants {
     String COMPANY = "company";
     String EMAIL = "email";
     String DEVICE_TOKEN = "device_token";
+    String U_ID = "u_id";
+    String IMAGE = "img";
 }

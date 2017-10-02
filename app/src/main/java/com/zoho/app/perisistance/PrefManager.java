@@ -62,4 +62,12 @@ public class PrefManager implements PrefConstants {
         String s = gson.toJson(categoryModelList, type);
         putString(SELECTED_LIST, s);
     }
+
+    public void putInt(String key, int value) {
+        sharedPreferences.edit().putInt(key, value).commit();
+    }
+
+    public int getInt(String key) {
+        return sharedPreferences.getInt(key, 0);
+    }
 }

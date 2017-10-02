@@ -1,8 +1,6 @@
 package com.zoho.app.activity;
 
 import android.Manifest;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,7 +8,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -22,16 +19,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.squareup.picasso.Picasso;
 import com.zoho.app.R;
-import com.zoho.app.custom.CustomProgressDialog;
 import com.zoho.app.netcom.CheckNetworkState;
 import com.zoho.app.presentor.RegisterPresentor;
-import com.zoho.app.presentor.SplashPresentor;
 import com.zoho.app.utils.ConstantLib;
-import com.zoho.app.utils.PdfCreater;
 import com.zoho.app.utils.Utils;
 import com.zoho.app.view.RegisterView;
-import com.zoho.app.view.SplashView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -51,6 +45,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     private String imagepath;
     private Uri uriImagePath;
     private ImageView backImageView;
+    private File userImageFile;
+    private EditText passEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         nameEditText = (EditText) findViewById(R.id.et_name);
         lastNameEditText = (EditText) findViewById(R.id.et_lastname);
         companyNameEditText = (EditText) findViewById(R.id.et_companyName);
+        passEditText = (EditText) findViewById(R.id.et_pass);
         emailEditText = (EditText) findViewById(R.id.et_email);
         progressBar = (ProgressBar) findViewById(R.id.loading);
 
@@ -105,24 +102,38 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         String lastName = lastNameEditText.getText().toString().trim();
         String company = companyNameEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
+        String password = passEditText.getText().toString().trim();
         if (name.length() == 0) {
             nameEditText.setError(getString(R.string.name_empty));
             return;
-        } else if (lastName.length() == 0) {
+        }
+        if (lastName.length() == 0) {
             lastNameEditText.setError(getString(R.string.lastname_empty));
             return;
-        } else if (company.length() == 0) {
+        }
+        if (company.length() == 0) {
             companyNameEditText.setError(getString(R.string.companyName_empty));
             return;
-        } else if (email.length() == 0) {
+        }
+        if (email.length() == 0) {
             emailEditText.setError(getString(R.string.email_empty));
             return;
-        } else if (!Utils.isValidEmail(email)) {
+        }
+        if (!Utils.isValidEmail(email)) {
             emailEditText.setError(getString(R.string.invalid_email));
             return;
         }
+
+        if (password.length() == 0) {
+            emailEditText.setError(getString(R.string.enter_password));
+            return;
+        }
+        if (userImageFile == null) {
+            Utils.showToast(this, getString(R.string.select_image));
+            return;
+        }
         enableDisableView(true);
-        registerPresentor.registerBySendingMail(name, lastName, company, email);
+        registerPresentor.register(name, lastName, company, email, userImageFile, password);
     }
 
     private void enableDisableView(boolean disable) {
@@ -132,12 +143,14 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             companyNameEditText.setEnabled(false);
             lastNameEditText.setEnabled(false);
             profileImageView.setEnabled(false);
+            passEditText.setEnabled(false);
         } else {
             nameEditText.setEnabled(true);
             emailEditText.setEnabled(true);
             companyNameEditText.setEnabled(true);
             lastNameEditText.setEnabled(true);
             profileImageView.setEnabled(true);
+            passEditText.setEnabled(true);
         }
     }
 
@@ -207,7 +220,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
 
     private void copyFile(File sourceFile, File destFile) throws IOException {
-
+        userImageFile = sourceFile;
         FileChannel source = null;
         FileChannel destination = null;
         source = new FileInputStream(sourceFile).getChannel();
@@ -226,8 +239,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     }
 
     public String getRealPathFromURI(Uri uri) {
-        String filePath = "";
-        if (uri.getHost().contains("com.android.providers.media")) {
+        String filePath =Utils.getPath(this,uri);
+    /*    if (uri.getHost().contains("com.android.providers.media")) {
             // Image pick from recent
             String wholeID = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
@@ -252,8 +265,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
             }
             // Split at colon, use second item in the array
-        }
-        return null;
+        }*/
+        return filePath;
     }
 
     private String getRealPathFromURI_API11to18(Uri contentUri) {
@@ -282,20 +295,22 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
                 case PICK_IMAGE:
                     Log.d("onActivityResult", "uriImagePath Gallary :" + data.getData().toString());
-                    File f = new File(imagepath);
+                    //   File f = new File(imagepath);
 
                     try {
-                        f.createNewFile();
-                        profileImageView.setImageURI(data.getData());
-                        cameraImageView.setVisibility(View.GONE);
+                        //   f.createNewFile();
                         String path = "";
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                             path = getRealPathFromURI(data.getData());
                         } else {
                             path = getRealPathFromURI_API11to18(data.getData());
                         }
-                        copyFile(new File(path), f);
-                    } catch (IOException e) {
+                        userImageFile = new File(path);
+                        cameraImageView.setVisibility(View.GONE);
+                        //Picasso.with(this).load(path).into(profileImageView);
+                        profileImageView.setImageURI(data.getData());
+                        // copyFile(new File(path), f);
+                    } catch (Exception e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }

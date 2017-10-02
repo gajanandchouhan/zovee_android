@@ -20,7 +20,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.zoho.app.R;
+import com.zoho.app.model.request.LoginRequestModel;
+import com.zoho.app.model.response.LoginResponseData;
+import com.zoho.app.model.response.LoginResponseModel;
+import com.zoho.app.netcom.ApiClient;
 import com.zoho.app.netcom.CheckNetworkState;
+import com.zoho.app.perisistance.PrefConstants;
+import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.presentor.RegisterPresentor;
 import com.zoho.app.utils.ConstantLib;
 import com.zoho.app.utils.Utils;
@@ -31,6 +37,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     ProgressBar progressBar;
@@ -69,8 +79,49 @@ public class LoginActivity extends AppCompatActivity {
             passwordEditText.setError(getString(R.string.password_empty));
             return;
         }
-        //enableDisableView(true);
-          startActivity(new Intent(this,MainActivity.class));
+        enableDisableView(true);
+        progressBar.setVisibility(View.VISIBLE);
+        //  startActivity(new Intent(this,MainActivity.class));
+        LoginRequestModel model=new LoginRequestModel();
+        model.setEmail(email);
+        model.setPassword(password);
+        Call<LoginResponseModel> loginResponseModelCall = ApiClient.getApiInterface().doLogin(model);
+        loginResponseModelCall.enqueue(new Callback<LoginResponseModel>() {
+            @Override
+            public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
+                progressBar.setVisibility(View.GONE);
+                enableDisableView(true);
+                if (response.body()!=null){
+                    LoginResponseModel body1 = response.body();
+                    if (body1.getResponseCode().equalsIgnoreCase(ConstantLib.RESPONSE_SUCCESS)){
+                        LoginResponseData responseData = body1.getResponseData();
+                        PrefManager.getInstance(LoginActivity.this).putString(PrefConstants.NAME,responseData.getFirstName());
+                        PrefManager.getInstance(LoginActivity.this).putString(PrefConstants.LASTNAME, responseData.getLastName());
+                        PrefManager.getInstance(LoginActivity.this).putString(PrefConstants.COMPANY, responseData.getCompanyName());
+                        PrefManager.getInstance(LoginActivity.this).putString(PrefConstants.EMAIL, responseData.getEmail());
+                        PrefManager.getInstance(LoginActivity.this).putString(PrefConstants.IMAGE, responseData.getImageUrl());
+                        PrefManager.getInstance(LoginActivity.this).putInt(PrefConstants.U_ID,responseData.getUserId());
+                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+
+                    }
+                    else{
+                        Utils.showToast(LoginActivity.this,body1.getResponseMessage());
+                    }
+                }
+                else{
+                    Utils.showToast(LoginActivity.this,getString(R.string.server_error));
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+                t.printStackTrace();
+                enableDisableView(true);
+                progressBar.setVisibility(View.GONE);
+                Utils.showToast(LoginActivity.this,getString(R.string.server_error));
+            }
+        });
     }
 
     private void enableDisableView(boolean disable) {

@@ -44,8 +44,8 @@
 
             <RelativeLayout
                 android:id="@+id/image_layout"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:background="@color/colorPrimary">
 
                 <com.zoho.app.custom.CircleImageView

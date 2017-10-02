@@ -7,6 +7,7 @@ import com.zoho.app.model.request.LoginRequestModel;
 import com.zoho.app.model.response.BaseResponseModel;
 import com.zoho.app.model.response.CategoryResponseModel;
 import com.zoho.app.model.response.LoginResponseModel;
+import com.zoho.app.model.response.SignupResponseModel;
 import com.zoho.app.model.response.VideoDetailsResponseModel;
 import com.zoho.app.model.response.VideoListResponseModel;
 
@@ -32,12 +33,12 @@ public interface ApiInterface {
 
     @POST("getVideoDetails")
     Call<VideoDetailsResponseModel> getVideoDetails(@Body IdViewModel idViewModel);
-
+//Multipart params :- FirstName,LastName,Email,Password,CompanyName,ProfilePicture
     @Multipart
     @POST("signUp")
-    Call<LoginResponseModel> doSignup(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,
-                                      @Part("Email") RequestBody email, @Part("Password") RequestBody password,
-                                      @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file);
+    Call<SignupResponseModel> doSignup(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,
+                                       @Part("Email") RequestBody email, @Part("Password") RequestBody password,
+                                       @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file);
 
     @POST("login")
     Call<LoginResponseModel> doLogin(@Body LoginRequestModel loginRequestModel);
