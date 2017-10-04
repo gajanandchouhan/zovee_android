@@ -105,9 +105,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     }
                     Utils.showToast(ChangePasswordActivity.this, response.body().getResponseMessage());
                 } else {
-
+                    Utils.showToast(ChangePasswordActivity.this, getString(R.string.server_error));
                 }
-                Utils.showToast(ChangePasswordActivity.this, getString(R.string.server_error));
+
             }
 
             @Override

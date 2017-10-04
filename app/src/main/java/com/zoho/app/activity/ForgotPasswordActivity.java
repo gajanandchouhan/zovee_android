@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.zoho.app.R;
 import com.zoho.app.model.request.EmailViewModel;
@@ -24,6 +25,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     EditText emailEditText;
     private ProgressBar progressBar;
     private ImageView backImageView;
+    private RelativeLayout buttonSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
         bindViews();
 
-        findViewById(R.id.btn_submit).setOnClickListener(new View.OnClickListener() {
+        buttonSubmit = (RelativeLayout) findViewById(R.id.btn_submit);
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 doForgotPassword();
@@ -75,6 +78,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BaseResponseModel> call, Response<BaseResponseModel> response) {
                 progressBar.setVisibility(View.GONE);
+                enableDisableView(false);
                 if (response.body() != null) {
                     if (response.body().getResponseCode().equalsIgnoreCase(ConstantLib.RESPONSE_SUCCESS)) {
                         finish();
@@ -89,6 +93,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<BaseResponseModel> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
+                enableDisableView(false);
                 Utils.showToast(ForgotPasswordActivity.this, getString(R.string.server_error));
                 t.printStackTrace();
             }
@@ -98,8 +103,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private void enableDisableView(boolean disable) {
         if (disable) {
             emailEditText.setEnabled(false);
+            buttonSubmit.setEnabled(false);
         } else {
             emailEditText.setEnabled(true);
+            buttonSubmit.setEnabled(true);
         }
     }
 

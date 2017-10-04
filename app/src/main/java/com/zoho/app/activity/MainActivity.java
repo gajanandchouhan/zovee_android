@@ -1,8 +1,7 @@
 package com.zoho.app.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,15 +10,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,8 +39,6 @@ import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.utils.ConstantLib;
 import com.zoho.app.utils.Utils;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -272,13 +266,37 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 pushFragments(new DeveloperDeskFragment());
                 break;
             case 4:
-                actionBar.setDisplayHomeAsUpEnabled(false);
-                actionBar.setHomeAsUpIndicator(null);
-                backImageView.setVisibility(View.VISIBLE);
-                toolbarTitle.setText(getString(R.string.setting));
-                pushFragments(new SettingFragment());
+                int id = PrefManager.getInstance(this).getInt(PrefConstants.U_ID);
+                if (id != 0) {
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                    actionBar.setHomeAsUpIndicator(null);
+                    backImageView.setVisibility(View.VISIBLE);
+                    toolbarTitle.setText(getString(R.string.setting));
+                    pushFragments(new SettingFragment());
+                } else {
+                    showAlert();
+                }
+
+
                 break;
         }
+    }
+
+    private void showAlert() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage(getString(R.string.signup_msg));
+        dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).setTitle("Need Signup").show();
     }
 
     private void shareApp() {

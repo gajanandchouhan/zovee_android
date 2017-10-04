@@ -15,9 +15,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.squareup.picasso.Picasso;
 import com.zoho.app.R;
@@ -47,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     private ImageView backImageView;
     private File userImageFile;
     private EditText passEditText;
+    private RelativeLayout registerButton, skipButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +57,19 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         setContentView(R.layout.activity_register);
         registerPresentor = new RegisterPresentor(this, this);
         bindViews();
-
-        findViewById(R.id.btn_register).setOnClickListener(new View.OnClickListener() {
+        registerButton = (RelativeLayout) findViewById(R.id.btn_register);
+        skipButton = (RelativeLayout) findViewById(R.id.btn_skip);
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 register();
+            }
+        });
+
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRegister();
             }
         });
     }
@@ -144,13 +155,16 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             lastNameEditText.setEnabled(false);
             profileImageView.setEnabled(false);
             passEditText.setEnabled(false);
+            registerButton.setEnabled(false);
         } else {
             nameEditText.setEnabled(true);
             emailEditText.setEnabled(true);
             companyNameEditText.setEnabled(true);
             lastNameEditText.setEnabled(true);
+            registerButton.setEnabled(false);
             profileImageView.setEnabled(true);
             passEditText.setEnabled(true);
+            registerButton.setEnabled(true);
         }
     }
 
@@ -163,7 +177,10 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     @Override
     public void onRegister() {
         Utils.showToast(this, "welcome " + nameEditText.getText().toString().trim());
-        Utils.startActivity(this, MainActivity.class, null);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        ActivityCompat.finishAffinity(this);
         finish();
     }
 
@@ -239,7 +256,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     }
 
     public String getRealPathFromURI(Uri uri) {
-        String filePath =Utils.getPath(this,uri);
+        String filePath = Utils.getPath(this, uri);
     /*    if (uri.getHost().contains("com.android.providers.media")) {
             // Image pick from recent
             String wholeID = null;

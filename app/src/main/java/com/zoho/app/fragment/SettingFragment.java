@@ -28,8 +28,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_setting, container, false);
-        textViewChangePass.setOnClickListener(this);
         textViewChangePass = (TextView) view.findViewById(R.id.text_change_password);
+        textViewChangePass.setOnClickListener(this);
         return view;
     }
 
