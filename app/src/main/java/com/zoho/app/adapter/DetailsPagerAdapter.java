@@ -4,7 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.zoho.app.fragment.CommentsFragment;
 import com.zoho.app.fragment.DescriptionFragment;
+import com.zoho.app.fragment.LikesFragment;
 
 /**
  * Created by hp on 17-08-2017.
@@ -21,9 +23,9 @@ public class DetailsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new DescriptionFragment();
             case 1:
-                return new DescriptionFragment();
+                return new LikesFragment();
             case 2:
-                return new DescriptionFragment();
+                return new CommentsFragment();
         }
         return null;
     }
@@ -37,6 +39,14 @@ public class DetailsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return "Description";
+            case 1:
+                return "Likes";
+            case 2:
+                return "Comments";
+        }
         return "";
     }
 

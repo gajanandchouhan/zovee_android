@@ -28,7 +28,12 @@ public class DescriptionFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         descTextView = (TextView) view.findViewById(R.id.textView_descript);
+        Fragment parentFragment = getParentFragment();
+        if (parentFragment instanceof DetailsFragment){
+            descTextView.setText(((DetailsFragment) parentFragment).getVideoDesc());
+        }
         descTextView.setMovementMethod(new ScrollingMovementMethod());
+
 
     }
 }

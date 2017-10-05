@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.common.api.PendingResult;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
@@ -42,7 +44,7 @@ import java.net.URL;
  * Created by hp on 01-10-2017.
  */
 
-public class DetailsFragment extends Fragment  {
+public class DetailsFragment extends Fragment {
     private static final int RECOVERY_DIALOG_REQUEST = 1;
     private VideoListModel videoListModel;
     private CustomProgressDialog progressDialog;
@@ -66,17 +68,17 @@ public class DetailsFragment extends Fragment  {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_detailss,container,false);
+        return inflater.inflate(R.layout.fragment_detailss, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mContext = getActivity();
-        videoListModel= (VideoListModel) getArguments().getSerializable(ConstantLib.VIDEO_MODEL);
-        tabLayout = (TabLayout)view. findViewById(R.id.tab_layout);
+        videoListModel = (VideoListModel) getArguments().getSerializable(ConstantLib.VIDEO_MODEL);
+        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         tabLayout.addOnTabSelectedListener(tabListner);
-        pager=(ViewPager)view.findViewById(R.id.pager);
+        pager = (ViewPager) view.findViewById(R.id.pager);
         pager.setAdapter(new DetailsPagerAdapter(getChildFragmentManager()));
         tabLayout.setupWithViewPager(pager);
         if (!CheckNetworkState.isOnline(getActivity())) {
@@ -161,7 +163,7 @@ public class DetailsFragment extends Fragment  {
     private void initializePlayer() {
 
         YouTubePlayerSupportFragment youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
-        FragmentTransaction transaction =getChildFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.youtube_fragment, youTubePlayerFragment).commit();
         youTubePlayerFragment.initialize(ConstantLib.DEVELOPER_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
@@ -205,15 +207,19 @@ public class DetailsFragment extends Fragment  {
     };
 
 
-    public void downloadPdf(){
+    public void downloadPdf() {
         if (videoDesc != null) {
-            if (Utils.hasPermissions(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE))
-                PdfCreater.createPdf(getActivity(), videoDesc, videoTitle + ".pdf");
-            else {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 111);
-            }
+
+            PdfCreater.createPdf(getActivity(), videoDesc, videoTitle + ".pdf");
+
         }
     }
+
+    public String getVideoDesc() {
+        return videoDesc;
+    }
+
+
 }
 
 
