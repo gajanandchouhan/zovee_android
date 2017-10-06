@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_gravity="center_horizontal">
+
+
+                <com.zoho.app.custom.CircleImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:src="@color/colorPrimary"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="2dp" />
+
+                <ImageView
+                    android:id="@+id/camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@android:drawable/ic_menu_camera"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <com.zoho.app.custom.RobotoRegularEditText
+                android:id="@+id/et_name"
+                style="@style/EditTextStyle"
+                android:hint="@string/firstname"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+
+            <com.zoho.app.custom.RobotoRegularEditText
+                android:id="@+id/et_lastname"
+                style="@style/EditTextStyle"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:hint="@string/lastname"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+
+            <com.zoho.app.custom.RobotoLightEditText
+                android:id="@+id/et_companyName"
+                style="@style/EditTextStyle"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:hint="@string/companyName"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+
+            <com.zoho.app.custom.RobotoLightEditText
+                android:id="@+id/et_email"
+                style="@style/EditTextStyle"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1" />
+
+
+
+
+                <RelativeLayout
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_bg"
+                    android:padding="@dimen/_5sdp">
+
+                    <com.zoho.app.custom.RobotoRegularTextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/submit"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp" />
+
+
+                </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

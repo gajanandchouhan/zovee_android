@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import com.zoho.app.fragment.DeveloperDeskFragment;
 import com.zoho.app.fragment.FeedbackFragment;
 import com.zoho.app.fragment.HomeFragment;
 import com.zoho.app.fragment.AskQuestionFragment;
+import com.zoho.app.fragment.MyAccountFragment;
 import com.zoho.app.fragment.SettingFragment;
 import com.zoho.app.model.DrawerItem;
 import com.zoho.app.netcom.CheckNetworkState;
@@ -59,6 +61,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
     TextView toolbarTitle, welcomeTextView;
     private ImageView backImageView, profileImageView;
     TextView charTextView;
+    private RelativeLayout headerLayout;
 
     ImageView imageViewFilter, imageViewNotification, imageViewSearch;
 
@@ -83,6 +86,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
 
     private void bindView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        headerLayout = (RelativeLayout) findViewById(R.id.header_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbarTitle = (TextView) findViewById(R.id.textView_title);
         charTextView = (TextView) findViewById(R.id.textView_char);
@@ -99,6 +103,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         imageViewFilter.setOnClickListener(this);
         imageViewNotification.setOnClickListener(this);
         imageViewSearch.setOnClickListener(this);
+        headerLayout.setOnClickListener(this);
         imageViewSearch.setVisibility(View.VISIBLE);
         mDrawerList.setLayoutManager(new LinearLayoutManager(this));
         mAdView = (AdView) findViewById(R.id.adView);
@@ -358,6 +363,10 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 }
                 break;
             case R.id.notification_imageView:
+                break;
+            case R.id.header_layout:
+                pushFragments(new MyAccountFragment());
+                mDrawerLayout.closeDrawer(layoutDrawer);
                 break;
             case R.id.search_imageView:
                 startActivity(new Intent(this, SearchActivity.class));
