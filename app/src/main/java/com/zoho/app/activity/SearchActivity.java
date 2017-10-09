@@ -70,7 +70,7 @@ public class SearchActivity extends AppCompatActivity implements VideoListView {
     }
 
     private void setAdapter(List<VideoListModel> list) {
-        adapter = new VideoListAdapter(this, list);
+        adapter = new VideoListAdapter(this, list,false);
         mRecyclerView.setAdapter(adapter);
     }
 

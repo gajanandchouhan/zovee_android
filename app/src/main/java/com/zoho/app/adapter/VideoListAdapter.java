@@ -28,12 +28,15 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Cust
     private List<VideoListModel> filteredList;
     private Context mContext;
     private List<VideoListModel> itemList;
+    private boolean isFromList;
 
-    public VideoListAdapter(Context mContext, List itemList) {
+    public VideoListAdapter(Context mContext, List itemList, boolean isFromList) {
         this.mContext = mContext;
         this.itemList = itemList;
         this.filteredList = new ArrayList<VideoListModel>();
-        this.filteredList.addAll(itemList);
+        this.isFromList=isFromList;
+        if (isFromList)
+            this.filteredList.addAll(itemList);
     }
 
     @Override
@@ -106,7 +109,9 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Cust
                     nlist.add(categoryModel);
                 }
             }
-
+            if (!isFromList&&constraint.length()==0){
+                nlist.clear();
+            }
             results.values = nlist;
             results.count = nlist.size();
 

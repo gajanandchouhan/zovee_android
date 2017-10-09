@@ -38,7 +38,7 @@ public interface ApiInterface {
     //Multipart params :- FirstName,LastName,Email,Password,CompanyName,ProfilePicture
     @Multipart
     @POST("signUp")
-    Call<SignupResponseModel> doSignup(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,
+    Call<LoginResponseModel> doSignup(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,
                                        @Part("Email") RequestBody email, @Part("Password") RequestBody password,
                                        @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file);
 
@@ -50,5 +50,12 @@ public interface ApiInterface {
 
     @POST("ForgotPassword")
     Call<BaseResponseModel> forgotPassword(@Body EmailViewModel emailViewModel);
+
+    @Multipart
+    @POST("updateUserProfile")
+    Call<LoginResponseModel> updateProfile(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,
+                                      @Part("UserId") RequestBody uid,
+                                      @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file);
+
 
 }

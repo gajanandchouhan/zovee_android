@@ -55,8 +55,8 @@ public class RegisterPresentor {
             Utils.showToast(mContext, mContext.getString(R.string.no_internet));
             return;
         }
-        registerView.showProgress();
-        AsyncTaskCompat.executeParallel(new AsyncTask<Void, Void, String>() {
+         /*  registerView.showProgress();
+     AsyncTaskCompat.executeParallel(new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
                 String response = doRegister(image, name, lastName, email, companyName, password);
@@ -85,8 +85,8 @@ public class RegisterPresentor {
                     Utils.showToast(mContext, mContext.getString(R.string.server_error));
                 }
             }
-        });
-       /* registerView.showProgress();
+        });*/
+        registerView.showProgress();
         final RequestBody requestFile =
                 RequestBody.create(MediaType.parse("multipart/form-data"), image);
 
@@ -112,13 +112,13 @@ public class RegisterPresentor {
                         MediaType.parse("text/plain"), password);
 
         ApiInterface apiInterface = ApiClient.getApiInterface();
-        Call<SignupResponseModel> loginResponseModelCall = apiInterface.doSignup(fName, lName, emailReq, pass, cName, body);
-        loginResponseModelCall.enqueue(new Callback<SignupResponseModel>() {
+        Call<LoginResponseModel> loginResponseModelCall = apiInterface.doSignup(fName, lName, emailReq, pass, cName, body);
+        loginResponseModelCall.enqueue(new Callback<LoginResponseModel>() {
             @Override
-            public void onResponse(Call<SignupResponseModel> call, Response<SignupResponseModel> response) {
+            public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
                 registerView.hideProgress();
                 if (response.body() != null) {
-                    LoginResponseModel body1 = response.body().getSignUpResult();
+                    LoginResponseModel body1 = response.body();
                     if (body1.getResponseCode().equalsIgnoreCase(ConstantLib.RESPONSE_SUCCESS)) {
                         LoginResponseData responseData = body1.getResponseData();
                         PrefManager.getInstance(mContext).putString(PrefConstants.NAME, responseData.getFirstName());
@@ -137,12 +137,12 @@ public class RegisterPresentor {
             }
 
             @Override
-            public void onFailure(Call<SignupResponseModel> call, Throwable t) {
+            public void onFailure(Call<LoginResponseModel> call, Throwable t) {
                 t.printStackTrace();
                 registerView.hideProgress();
                 Utils.showToast(mContext, mContext.getString(R.string.server_error));
             }
-        });*/
+        });
 /*
         //   registerView.showProgress();
      *//*  *//*

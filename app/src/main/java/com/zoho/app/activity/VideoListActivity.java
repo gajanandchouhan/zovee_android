@@ -93,7 +93,7 @@ public class VideoListActivity extends BaseActivity implements VideoListView {
     }
 
     private void setAdapter(List<VideoListModel> list) {
-        adapter = new VideoListAdapter(this, list);
+        adapter = new VideoListAdapter(this, list, true);
         mRecyclerView.setAdapter(adapter);
     }
 

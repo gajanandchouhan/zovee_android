@@ -62,4 +62,5 @@
     <string name="password_not_match">Password is not matching.</string>
     <string name="skip">Skip</string>
     <string name="signup_msg">To access this feature, you need to signup.</string>
+    <string name="logout_msg">Are you sure want to logout from ZoVee?</string>
 </resources>

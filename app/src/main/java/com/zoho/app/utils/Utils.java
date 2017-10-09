@@ -1,8 +1,10 @@
 package com.zoho.app.utils;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -14,6 +16,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -66,6 +69,7 @@ public class Utils {
         }
         return true;
     }
+
     public static String getVersion(Context mContext) {
         try {
             PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
@@ -76,6 +80,7 @@ public class Utils {
         }
         return null;
     }
+
     public static String getPath(final Context context, final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -119,7 +124,7 @@ public class Utils {
                 }
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[] {
+                final String[] selectionArgs = new String[]{
                         split[1]
                 };
 
@@ -147,9 +152,9 @@ public class Utils {
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param context The context.
-     * @param uri The Uri to query.
-     * @param selection (Optional) Filter used in the query.
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
@@ -209,4 +214,20 @@ public class Utils {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 
+    public static void showAlert(Context mContext, String msg, final DialogClickListnenr listner) {
+        new AlertDialog.Builder(mContext).setTitle(mContext.getString(R.string.app_name)).setMessage(msg).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                listner.onOkClick();
+
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                listner.onCancelClick();
+                dialog.dismiss();
+            }
+        }).show();
+    }
 }

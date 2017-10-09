@@ -1,12 +1,17 @@
 package com.zoho.app.perisistance;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.Preference;
+import android.support.v4.app.ActivityCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.zoho.app.activity.LoginActivity;
+import com.zoho.app.activity.MainActivity;
 import com.zoho.app.model.response.CategoryModel;
+import com.zoho.app.model.response.LoginResponseData;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -69,5 +74,14 @@ public class PrefManager implements PrefConstants {
 
     public int getInt(String key) {
         return sharedPreferences.getInt(key, 0);
+    }
+
+    public void logout() {
+        putString(LASTNAME, "");
+        putString(NAME, "");
+        putString(COMPANY, "");
+        putString(EMAIL, "");
+        putString(IMAGE, "");
+        putInt(PrefConstants.U_ID, 0);
     }
 }
