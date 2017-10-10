@@ -19,12 +19,13 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         setContentView(R.layout.activity_splash);
         splashPresentor = new SplashPresentor(this);
         splashPresentor.delaySpalsh();
+        Utils.printHashKey(this);
     }
 
     @Override
     public void navigateToNextActivty() {
         if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) == 0) {
-            Utils.startActivity(this, LoginActivity.class, null);
+            Utils.startActivity(this, OptionsActivity.class, null);
         } else {
             Utils.startActivity(this, MainActivity.class, null);
         }

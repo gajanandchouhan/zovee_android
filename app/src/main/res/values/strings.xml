@@ -63,4 +63,8 @@
     <string name="skip">Skip</string>
     <string name="signup_msg">To access this feature, you need to signup.</string>
     <string name="logout_msg">Are you sure want to logout from ZoVee?</string>
+    <string name="signup">Sign Up</string>
+
+    <string name="facebook_app_id">123121555031740</string>
+    <string name="fb_login_protocol_scheme">fb123121555031740</string>
 </resources>

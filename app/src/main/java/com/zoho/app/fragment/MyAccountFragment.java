@@ -146,20 +146,24 @@ public class MyAccountFragment extends Fragment {
         String name = nameEditText.getText().toString().trim();
         String lastName = lastNameEditText.getText().toString().trim();
         String company = companyNameEditText.getText().toString().trim();
-        if (name.length() == 0&&lastName.length()==0&&company.length()==0) {
-            Utils.showToast(getActivity(),"Please enter something");
+        if (name.length() == 0 && lastName.length() == 0 && company.length() == 0) {
+            Utils.showToast(getActivity(), "Please enter something");
             return;
         }
        /* if (userImageFile==null){
             Utils.showToast(getActivity(),getString(R.string.select_image));
             return;
         }*/
-        final RequestBody requestFile =
-                RequestBody.create(MediaType.parse("multipart/form-data"), userImageFile);
+        MultipartBody.Part body = null;
+        if (userImageFile != null) {
+            final RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), userImageFile);
 
 // MultipartBody.Part is used to send also the actual file name
-        final MultipartBody.Part body =
-                MultipartBody.Part.createFormData("ProfilePicture", userImageFile!=null?userImageFile.getName():"", requestFile);
+
+            body = MultipartBody.Part.createFormData("ProfilePicture", userImageFile != null ? userImageFile.getName() : "", requestFile);
+        }
+
 
 // add another part within the multipart request
         RequestBody fName =

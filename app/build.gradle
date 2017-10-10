@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 repositories {
     // ...
-    maven { url "https://jitpack.io" }
+  //  maven { url "https://jitpack.io" }
 }
 android {
     compileSdkVersion 25
@@ -39,6 +39,8 @@ dependencies {
     compile project(':gmailbackgroundlibrary')
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    compile 'com.facebook.android:facebook-login:4.27.0'
+    compile 'com.google.android.gms:play-services-auth:11.0.1'
 
 }
 apply plugin: 'com.google.gms.google-services'
