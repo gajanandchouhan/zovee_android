@@ -39,8 +39,10 @@ public interface ApiInterface {
     @Multipart
     @POST("signUp")
     Call<LoginResponseModel> doSignup(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,
-                                       @Part("Email") RequestBody email, @Part("Password") RequestBody password,
-                                       @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file);
+                                      @Part("Email") RequestBody email, @Part("Password") RequestBody password,
+                                      @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file,
+                                      @Part("DeviceToken") RequestBody token, @Part("SocialId") RequestBody socialId,
+                                      @Part("RegistrationBy") RequestBody regType);
 
     @POST("login")
     Call<LoginResponseModel> doLogin(@Body LoginRequestModel loginRequestModel);
@@ -54,8 +56,8 @@ public interface ApiInterface {
     @Multipart
     @POST("updateUserProfile")
     Call<LoginResponseModel> updateProfile(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,
-                                      @Part("UserId") RequestBody uid,
-                                      @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file);
+                                           @Part("UserId") RequestBody uid,
+                                           @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file);
 
 
 }

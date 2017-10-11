@@ -24,6 +24,8 @@ import android.widget.RelativeLayout;
 import com.squareup.picasso.Picasso;
 import com.zoho.app.R;
 import com.zoho.app.netcom.CheckNetworkState;
+import com.zoho.app.perisistance.PrefConstants;
+import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.presentor.RegisterPresentor;
 import com.zoho.app.utils.ConstantLib;
 import com.zoho.app.utils.Utils;
@@ -144,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             return;
         }
         enableDisableView(true);
-        registerPresentor.register(name, lastName, company, email, userImageFile, password);
+        registerPresentor.register(name, lastName, company, email, userImageFile, password, PrefManager.getInstance(this).getString(PrefConstants.DEVICE_TOKEN),"","1");
     }
 
     private void enableDisableView(boolean disable) {

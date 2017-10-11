@@ -3,13 +3,9 @@ package com.zoho.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -26,37 +22,34 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.zoho.app.R;
-import com.zoho.app.model.request.LoginRequestModel;
-import com.zoho.app.model.response.LoginResponseData;
-import com.zoho.app.model.response.LoginResponseModel;
-import com.zoho.app.netcom.ApiClient;
+import com.zoho.app.custom.CustomProgressDialog;
 import com.zoho.app.netcom.CheckNetworkState;
 import com.zoho.app.perisistance.PrefConstants;
 import com.zoho.app.perisistance.PrefManager;
-import com.zoho.app.utils.ConstantLib;
+import com.zoho.app.presentor.RegisterPresentor;
 import com.zoho.app.utils.Utils;
+import com.zoho.app.view.RegisterView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class OptionsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class OptionsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, RegisterView {
 
 
     private static final int RC_SIGN_IN = 111;
     private CallbackManager callbackManager;
     private GoogleApiClient mGoogleApiClient;
+    private RegisterPresentor presentor;
+    private CustomProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
+
+        presentor = new RegisterPresentor(this, this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -65,10 +58,11 @@ public class OptionsActivity extends AppCompatActivity implements GoogleApiClien
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        findViewById(R.id.btn_signup).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(OptionsActivity.this, MainActivity.class));
+                finish();
             }
         });
 
@@ -84,6 +78,13 @@ public class OptionsActivity extends AppCompatActivity implements GoogleApiClien
             @Override
             public void onClick(View v) {
                 signIn();
+            }
+        });
+
+        findViewById(R.id.btn_signup).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OptionsActivity.this, LoginActivity.class));
             }
         });
     }
@@ -117,7 +118,7 @@ public class OptionsActivity extends AppCompatActivity implements GoogleApiClien
                         Log.v("ERROR", "ERROR" + exc.getMessage());
                     }
                 });
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile","email"));
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"));
     }
 
     @Override
@@ -134,9 +135,37 @@ public class OptionsActivity extends AppCompatActivity implements GoogleApiClien
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
-           Log.v("Google",acct.getDisplayName());
+            Log.v("Google", acct.getDisplayName());
 
+            String fullame = acct.getDisplayName();
+            String email = acct.getEmail();
+            String id = acct.getId();
+            String[] parts = fullame.split("\\s+");
+            Log.d("Length-->", "" + parts.length);
+            String firstname = "";
+            String lastname = "";
+            if (parts.length == 2) {
+                firstname = parts[0];
+                lastname = parts[1];
+                Log.d("First-->", "" + firstname);
+                Log.d("Last-->", "" + lastname);
+
+            } else if (parts.length == 3) {
+                firstname = parts[0];
+                String middlename = parts[1];
+                lastname = parts[2];
+            }
+            doSoicialSignup(firstname, lastname, email, id, "3", PrefManager.getInstance(OptionsActivity.this).getString(PrefConstants.DEVICE_TOKEN));
         }
+    }
+
+    private void doSoicialSignup(String firstname, String lastname, String email, String socialId, String type, String deviceToken) {
+        if (!CheckNetworkState.isOnline(this)) {
+            Utils.showToast(this, getString(R.string.no_internet));
+            return;
+        }
+        presentor.register(firstname, lastname, "", email, null, "",
+                PrefManager.getInstance(this).getString(PrefConstants.DEVICE_TOKEN), socialId, type);
     }
 
     @Override
@@ -145,8 +174,7 @@ public class OptionsActivity extends AppCompatActivity implements GoogleApiClien
     }
 
 
-    private void setFacebookData(final LoginResult loginResult)
-    {
+    private void setFacebookData(final LoginResult loginResult) {
         GraphRequest request = GraphRequest.newMeRequest(
                 loginResult.getAccessToken(),
                 new GraphRequest.GraphJSONObjectCallback() {
@@ -154,7 +182,7 @@ public class OptionsActivity extends AppCompatActivity implements GoogleApiClien
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         // Application code
                         try {
-                            Log.i("Response",response.toString());
+                            Log.i("Response", response.toString());
 
                             String email = response.getJSONObject().getString("email");
                             String firstName = response.getJSONObject().getString("first_name");
@@ -162,21 +190,19 @@ public class OptionsActivity extends AppCompatActivity implements GoogleApiClien
                             String gender = response.getJSONObject().getString("gender");
 
 
-
                             Profile profile = Profile.getCurrentProfile();
                             String id = profile.getId();
                             String link = profile.getLinkUri().toString();
-                            Log.i("Link",link);
-                            if (Profile.getCurrentProfile()!=null)
-                            {
+                            Log.i("Link", link);
+                            if (Profile.getCurrentProfile() != null) {
                                 Log.i("Login", "ProfilePic" + Profile.getCurrentProfile().getProfilePictureUri(200, 200));
                             }
 
                             Log.i("Login" + "Email", email);
-                            Log.i("Login"+ "FirstName", firstName);
+                            Log.i("Login" + "FirstName", firstName);
                             Log.i("Login" + "LastName", lastName);
                             Log.i("Login" + "Gender", gender);
-
+                            doSoicialSignup(firstName, lastName, email, id, "2", PrefManager.getInstance(OptionsActivity.this).getString(PrefConstants.DEVICE_TOKEN));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -187,6 +213,24 @@ public class OptionsActivity extends AppCompatActivity implements GoogleApiClien
         parameters.putString("fields", "id,email,first_name,last_name,gender");
         request.setParameters(parameters);
         request.executeAsync();
+    }
+
+    @Override
+    public void showProgress() {
+        progressDialog = new CustomProgressDialog(this);
+        progressDialog.show();
+    }
+
+    @Override
+    public void onRegister() {
+        Utils.startActivity(this, MainActivity.class, null);
+    }
+
+    @Override
+    public void hideProgress() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }
 

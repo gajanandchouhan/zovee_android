@@ -117,7 +117,7 @@ public class MyAccountFragment extends Fragment {
         lastNameEditText.setText(lastName);
         emailEditText.setText(email);
         companyNameEditText.setText(companyName);
-        Picasso.with(profileImageView.getContext()).load(imageUrl).into(profileImageView);
+        Picasso.with(profileImageView.getContext()).load(imageUrl).placeholder(R.drawable.user).into(profileImageView);
     }
 
     private void enableDisableView(boolean disable) {

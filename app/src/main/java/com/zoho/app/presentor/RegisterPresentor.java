@@ -50,7 +50,8 @@ public class RegisterPresentor {
         this.mContext = mContext;
     }
 
-    public void register(final String name, final String lastName, final String companyName, final String email, final File image, final String password) {
+    public void register(final String name, final String lastName, final String companyName, final String email, final File image,
+                         final String password, String deviceToken, String socialId, String type) {
         if (!CheckNetworkState.isOnline(mContext)) {
             Utils.showToast(mContext, mContext.getString(R.string.no_internet));
             return;
@@ -87,13 +88,15 @@ public class RegisterPresentor {
             }
         });*/
         registerView.showProgress();
-        final RequestBody requestFile =
-                RequestBody.create(MediaType.parse("multipart/form-data"), image);
+        MultipartBody.Part body = null;
+        if (image != null) {
+            final RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), image);
 
 // MultipartBody.Part is used to send also the actual file name
-        final MultipartBody.Part body =
-                MultipartBody.Part.createFormData("ProfilePicture", image.getName(), requestFile);
 
+            body = MultipartBody.Part.createFormData("ProfilePicture", image != null ? image.getName() : "", requestFile);
+        }
 // add another part within the multipart request
         RequestBody fName =
                 RequestBody.create(
@@ -110,9 +113,17 @@ public class RegisterPresentor {
         RequestBody pass =
                 RequestBody.create(
                         MediaType.parse("text/plain"), password);
-
+        RequestBody token =
+                RequestBody.create(
+                        MediaType.parse("text/plain"), deviceToken);
+        RequestBody sId =
+                RequestBody.create(
+                        MediaType.parse("text/plain"), socialId);
+        RequestBody signupType =
+                RequestBody.create(
+                        MediaType.parse("text/plain"), type);
         ApiInterface apiInterface = ApiClient.getApiInterface();
-        Call<LoginResponseModel> loginResponseModelCall = apiInterface.doSignup(fName, lName, emailReq, pass, cName, body);
+        Call<LoginResponseModel> loginResponseModelCall = apiInterface.doSignup(fName, lName, emailReq, pass, cName, body,token,sId, signupType);
         loginResponseModelCall.enqueue(new Callback<LoginResponseModel>() {
             @Override
             public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {

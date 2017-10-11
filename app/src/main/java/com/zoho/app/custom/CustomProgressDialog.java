@@ -25,6 +25,6 @@ public class CustomProgressDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_view);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+        setCancelable(false);
     }
 }

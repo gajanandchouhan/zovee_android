@@ -8,6 +8,8 @@
     <com.zoho.app.custom.RobotoMediumButton
         android:id="@+id/btn_signup"
         style="@style/ButtonStyle"
+        android:layout_marginLeft="@dimen/_50sdp"
+        android:layout_marginRight="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_50sdp"
         android:text="@string/signup" />
 
@@ -25,8 +27,8 @@
         android:id="@+id/btn_facebook"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_50sdp"
+        android:layout_marginRight="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_40sdp"
         android:background="@drawable/button_bg">
 
@@ -38,7 +40,7 @@
             android:drawableLeft="@drawable/facebbok"
             android:drawablePadding="@dimen/_10sdp"
             android:gravity="center"
-            android:text="@string/signup"
+            android:text="@string/facebook"
             android:textColor="@color/white"
             android:textSize="@dimen/_13sdp" />
     </RelativeLayout>
@@ -47,8 +49,8 @@
         android:id="@+id/btn_google"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_50sdp"
+        android:layout_marginRight="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_40sdp"
         android:background="@drawable/button_bg">
 
@@ -60,9 +62,16 @@
             android:drawableLeft="@drawable/google"
             android:drawablePadding="@dimen/_10sdp"
             android:gravity="center"
-            android:text="@string/signup"
+            android:text="@string/google"
             android:textColor="@color/white"
             android:textSize="@dimen/_13sdp" />
     </RelativeLayout>
 
+    <com.zoho.app.custom.RobotoMediumButton
+        android:id="@+id/btn_skip"
+        style="@style/ButtonStyle"
+        android:layout_marginLeft="@dimen/_50sdp"
+        android:layout_marginRight="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:text="@string/skip" />
 </LinearLayout>
