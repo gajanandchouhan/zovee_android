@@ -120,6 +120,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
             charTextView.setText("" + name.charAt(0));
         } else {
             Picasso.with(this).load(img).into(profileImageView);
+            charTextView.setVisibility(View.GONE);
         }
 
         backImageView.setOnClickListener(new View.OnClickListener() {
@@ -365,6 +366,8 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
             case R.id.notification_imageView:
                 break;
             case R.id.header_layout:
+                currentpos=-1;
+                adapter.setSelectedPosition(-1);
                 pushFragments(new MyAccountFragment());
                 mDrawerLayout.closeDrawer(layoutDrawer);
                 break;
@@ -372,5 +375,11 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 startActivity(new Intent(this, SearchActivity.class));
                 break;
         }
+    }
+
+    public void refreshImage(){
+        String img = PrefManager.getInstance(this).getString(PrefConstants.IMAGE);
+        Picasso.with(this).load(img).into(profileImageView);
+        charTextView.setVisibility(View.GONE);
     }
 }

@@ -200,10 +200,8 @@ public class MyAccountFragment extends Fragment {
                         PrefManager.getInstance(mContext).putString(PrefConstants.IMAGE, responseData.getImageUrl());
                         PrefManager.getInstance(mContext).putInt(PrefConstants.U_ID, responseData.getUserId());
                         setView();
-
-                    } else {
-                        Utils.showToast(getActivity(), body1.getResponseMessage());
                     }
+                    Utils.showToast(getActivity(), body1.getResponseMessage());
                 } else {
                     Utils.showToast(getActivity(), getString(R.string.server_error));
                 }
