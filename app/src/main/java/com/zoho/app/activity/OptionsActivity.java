@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -69,6 +70,9 @@ public class OptionsActivity extends AppCompatActivity implements GoogleApiClien
         findViewById(R.id.btn_facebook).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (AccessToken.getCurrentAccessToken() != null) {
+                    LoginManager.getInstance().logOut();
+                }
                 loginWithFb();
             }
         });
@@ -187,21 +191,7 @@ public class OptionsActivity extends AppCompatActivity implements GoogleApiClien
                             String email = response.getJSONObject().getString("email");
                             String firstName = response.getJSONObject().getString("first_name");
                             String lastName = response.getJSONObject().getString("last_name");
-                            String gender = response.getJSONObject().getString("gender");
-
-
-                            Profile profile = Profile.getCurrentProfile();
-                            String id = profile.getId();
-                            String link = profile.getLinkUri().toString();
-                            Log.i("Link", link);
-                            if (Profile.getCurrentProfile() != null) {
-                                Log.i("Login", "ProfilePic" + Profile.getCurrentProfile().getProfilePictureUri(200, 200));
-                            }
-
-                            Log.i("Login" + "Email", email);
-                            Log.i("Login" + "FirstName", firstName);
-                            Log.i("Login" + "LastName", lastName);
-                            Log.i("Login" + "Gender", gender);
+                            String id = response.getJSONObject().getString("id");
                             doSoicialSignup(firstName, lastName, email, id, "2", PrefManager.getInstance(OptionsActivity.this).getString(PrefConstants.DEVICE_TOKEN));
 
                         } catch (JSONException e) {

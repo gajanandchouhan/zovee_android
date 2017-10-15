@@ -19,6 +19,7 @@ import com.zoho.app.custom.AutoScrollViewPager;
 import com.zoho.app.model.response.CategoryModel;
 import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.utils.ConstantLib;
+import com.zoho.app.utils.PagerTransform;
 import com.zoho.app.utils.Utils;
 
 import java.util.ArrayList;
@@ -152,6 +153,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             autoScrollViewPager.setInterval(3000);
             autoScrollViewPager.setCycle(true);
             autoScrollViewPager.setStopScrollWhenTouch(true);
+            autoScrollViewPager.setAutoScrollDurationFactor(10);
+            autoScrollViewPager.setPageTransformer(true,new PagerTransform());
             autoScrollViewPager.setAdapter(new BannerPagerAdapter(mContext, itemList.get(0).getMasterBanners()));
             indicator = (CirclePageIndicator) itemView.findViewById(R.id.indicator);
             indicator.setViewPager(autoScrollViewPager);

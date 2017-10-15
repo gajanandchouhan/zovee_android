@@ -37,7 +37,7 @@ public interface ApiInterface {
 
     //Multipart params :- FirstName,LastName,Email,Password,CompanyName,ProfilePicture
     @Multipart
-    @POST("signUp")
+    @POST("registration")
     Call<LoginResponseModel> doSignup(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,
                                       @Part("Email") RequestBody email, @Part("Password") RequestBody password,
                                       @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file,

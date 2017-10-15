@@ -366,6 +366,9 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
             case R.id.notification_imageView:
                 break;
             case R.id.header_layout:
+                if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID)==0){
+                    return;
+                }
                 currentpos=-1;
                 adapter.setSelectedPosition(-1);
                 pushFragments(new MyAccountFragment());
