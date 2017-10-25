@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,7 +7,7 @@
     <com.zoho.app.custom.RobotoLightEditText
         android:id="@+id/et_email"
         style="@style/EditTextStyle"
-        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:maxLines="1" />
@@ -15,6 +15,7 @@
     <com.zoho.app.custom.RobotoLightEditText
         android:id="@+id/et_pass"
         style="@style/EditTextStyle"
+        android:layout_below="@+id/et_email"
         android:layout_marginTop="@dimen/_20sdp"
         android:hint="@string/password"
         android:inputType="textPassword"
@@ -22,6 +23,7 @@
 
     <RelativeLayout
         android:id="@+id/btn_login"
+        android:layout_below="@+id/et_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_20sdp"
@@ -56,12 +58,58 @@
         android:id="@+id/textView_forgot_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:onClick="onForgot"
+        android:layout_below="@+id/btn_login"
         android:text="@string/forgot_pass"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_14sdp" />
+    <RelativeLayout
+        android:id="@+id/btn_facebook"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_below="@+id/textView_forgot_pass"
+        android:layout_marginLeft="@dimen/_50sdp"
+        android:layout_marginRight="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:background="@drawable/button_bg">
+
+        <com.zoho.app.custom.RobotoMediumTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/facebbok"
+            android:drawablePadding="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/facebook"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_google"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/btn_facebook"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginLeft="@dimen/_50sdp"
+        android:layout_marginRight="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:background="@drawable/button_bg">
+
+        <com.zoho.app.custom.RobotoMediumTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/google"
+            android:drawablePadding="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/google"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp" />
+    </RelativeLayout>
 
     <com.zoho.app.custom.RobotoMediumTextView
         android:id="@+id/textView_new_user"
@@ -70,7 +118,45 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
         android:onClick="onNewUser"
+        android:visibility="gone"
         android:text="@string/new_user"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_14sdp" />
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <com.zoho.app.custom.RobotoRegularTextView
+            android:id="@+id/textView_skip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="onSkip"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/skip"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp" />
+
+        <View
+            android:layout_width="0.1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <com.zoho.app.custom.RobotoRegularTextView
+            android:id="@+id/textView_signin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="onNewUser"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/signup"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp" />
+    </LinearLayout>
+</RelativeLayout>

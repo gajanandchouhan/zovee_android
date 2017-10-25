@@ -10,7 +10,7 @@
     <string name="mobile_empty">Please enter mobile number.</string>
     <string name="companyName_empty">Please enter company name.</string>
     <string name="email_empty">Please enter email.</string>
-    <string name="invalid_email">Enter valid email address.</string>
+    <string name="invalid_email">Please enter valid email address.</string>
     <string name="error">Something went wrong, please try again.</string>
     <string name="no_internet">No internet connection, please connect to internet first.</string>
     <string name="home">Home</string>
@@ -67,6 +67,8 @@
 
     <string name="facebook_app_id">123121555031740</string>
     <string name="fb_login_protocol_scheme">fb123121555031740</string>
-    <string name="facebook">Facebook</string>
-    <string name="google">Google</string>
+    <string name="facebook">Sign in with Facebook</string>
+    <string name="google">Sign in with Google</string>
+    <string name="signin">Sign in</string>
+    <string name="learn_zovee">Learn Zoho by video</string>
 </resources>
