@@ -48,22 +48,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), ChangePasswordActivity.class));
                 break;
             case R.id.textView_logout:
-               Utils.showAlert(getActivity(), getString(R.string.logout_msg), new DialogClickListnenr() {
-                   @Override
-                   public void onOkClick() {
-                       PrefManager.getInstance(getActivity()).logout();
-                       Intent intent = new Intent(getActivity(), LoginActivity.class);
-                       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                       startActivity(intent);
-                       ActivityCompat.finishAffinity(getActivity());
-                       getActivity().finish();
-                   }
 
-                   @Override
-                   public void onCancelClick() {
-
-                   }
-               });
                 break;
         }
     }

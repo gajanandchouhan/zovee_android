@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -39,6 +40,7 @@ import com.zoho.app.netcom.CheckNetworkState;
 import com.zoho.app.perisistance.PrefConstants;
 import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.utils.ConstantLib;
+import com.zoho.app.utils.DialogClickListnenr;
 import com.zoho.app.utils.Utils;
 
 import java.util.ArrayList;
@@ -138,10 +140,15 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         drawerItemList.add(new DrawerItem(getString(R.string.help), R.drawable.help_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.share), R.drawable.share_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.feedback), R.drawable.feedback_selector));
-        drawerItemList.add(new DrawerItem(getString(R.string.setting), R.drawable.feedback_selector));
+        if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
+            drawerItemList.add(new DrawerItem(getString(R.string.setting), R.drawable.feedback_selector));
+        }
         drawerItemList.add(new DrawerItem(getString(R.string.about_us), R.drawable.about_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.rate_us), R.drawable.rate_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.dev_desk), R.drawable.developer_desk_selector));
+        if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
+            drawerItemList.add(new DrawerItem(getString(R.string.logout), R.drawable.feedback_selector));
+        }
         return drawerItemList;
     }
 
@@ -214,6 +221,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
     @Override
     public void onClick(int position) {
         mDrawerLayout.closeDrawer(layoutDrawer);
+        String title = getDrawerItems().get(position).getTitle();
         if (position == currentpos && currentpos != 2 && currentpos != 5) {
             return;
         }
@@ -223,8 +231,8 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
             adapter.setSelectedPosition(position);
             adapter.notifyDataSetChanged();
         }
-        switch (position) {
-            case 0:
+        switch (title) {
+            case "Home":
                 toolbarTitle.setText(getString(R.string.app_name));
                 actionBar.setDisplayHomeAsUpEnabled(true);
                 actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -232,46 +240,46 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 pushFragments(new HomeFragment());
                 // myActionMenuItem.setVisible(true);
                 break;
-            case 1:
+            case "Help":
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setHomeAsUpIndicator(null);
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.help));
                 pushFragments(new AskQuestionFragment());
                 break;
-            case 2:
+            case "Share":
                 //  if (getCurrentFragment() instanceof HomeFragment)
                 // myActionMenuItem.setVisible(true);
                 shareApp();
                 break;
-            case 3:
+            case "Feedback":
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setHomeAsUpIndicator(null);
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.feedback));
                 pushFragments(new FeedbackFragment());
                 break;
-            case 5:
+            case "About Us":
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setHomeAsUpIndicator(null);
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.about_us));
                 pushFragments(new AboutUsFragment());
                 break;
-            case 6:
+            case "Rate Us":
                 //if (getCurrentFragment() instanceof HomeFragment)
                 //  myActionMenuItem.setVisible(true);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ConstantLib.APP_URL));
                 startActivity(browserIntent);
                 break;
-            case 7:
+            case "Developer's Desk":
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setHomeAsUpIndicator(null);
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.dev_desk));
                 pushFragments(new DeveloperDeskFragment());
                 break;
-            case 4:
+            case "Setting":
                 int id = PrefManager.getInstance(this).getInt(PrefConstants.U_ID);
                 if (id != 0) {
                     actionBar.setDisplayHomeAsUpEnabled(false);
@@ -283,7 +291,24 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                     showAlert();
                 }
 
+                break;
+            case "Logout":
+                Utils.showAlert(MainActivity.this, getString(R.string.logout_msg), new DialogClickListnenr() {
+                    @Override
+                    public void onOkClick() {
+                        PrefManager.getInstance(MainActivity.this).logout();
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        ActivityCompat.finishAffinity(MainActivity.this);
+                        finish();
+                    }
 
+                    @Override
+                    public void onCancelClick() {
+
+                    }
+                });
                 break;
         }
     }
@@ -366,10 +391,10 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
             case R.id.notification_imageView:
                 break;
             case R.id.header_layout:
-                if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID)==0){
+                if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) == 0) {
                     return;
                 }
-                currentpos=-1;
+                currentpos = -1;
                 adapter.setSelectedPosition(-1);
                 pushFragments(new MyAccountFragment());
                 mDrawerLayout.closeDrawer(layoutDrawer);
@@ -380,7 +405,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         }
     }
 
-    public void refreshImage(){
+    public void refreshImage() {
         String img = PrefManager.getInstance(this).getString(PrefConstants.IMAGE);
         Picasso.with(this).load(img).into(profileImageView);
         charTextView.setVisibility(View.GONE);

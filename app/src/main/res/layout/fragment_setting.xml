@@ -62,12 +62,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_10sdp"
+        android:visibility="gone"
         android:text="Log out"
         android:textColor="@color/text_color1"
         android:textSize="@dimen/_14sdp" />
 
     <View
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="0.5dp"
         android:background="@color/text_color1" />
 </LinearLayout>

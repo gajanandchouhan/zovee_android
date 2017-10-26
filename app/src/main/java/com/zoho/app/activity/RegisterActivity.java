@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 
 import com.squareup.picasso.Picasso;
 import com.zoho.app.R;
+import com.zoho.app.custom.CustomProgressDialog;
 import com.zoho.app.netcom.CheckNetworkState;
 import com.zoho.app.perisistance.PrefConstants;
 import com.zoho.app.perisistance.PrefManager;
@@ -40,7 +41,7 @@ import java.nio.channels.FileChannel;
 public class RegisterActivity extends AppCompatActivity implements RegisterView {
     private static final int PERMISSION_CODE = 112;
     private RegisterPresentor registerPresentor;
-    ProgressBar progressBar;
+    // ProgressBar progressBar;
     EditText nameEditText, lastNameEditText, companyNameEditText, emailEditText;
     ImageView cameraImageView;
     ImageView profileImageView;
@@ -52,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     private File userImageFile;
     private EditText passEditText;
     private RelativeLayout registerButton, skipButton;
+    private CustomProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +84,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         companyNameEditText = (EditText) findViewById(R.id.et_companyName);
         passEditText = (EditText) findViewById(R.id.et_pass);
         emailEditText = (EditText) findViewById(R.id.et_email);
-        progressBar = (ProgressBar) findViewById(R.id.loading);
 
         cameraImageView = (ImageView) findViewById(R.id.camera);
         profileImageView = (ImageView) findViewById(R.id.imageView);
@@ -146,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             return;
         }
         enableDisableView(true);
-        registerPresentor.register(name, lastName, company, email, userImageFile, password, PrefManager.getInstance(this).getString(PrefConstants.DEVICE_TOKEN),"","1");
+        registerPresentor.register(name, lastName, company, email, userImageFile, password, PrefManager.getInstance(this).getString(PrefConstants.DEVICE_TOKEN), "", "1");
     }
 
     private void enableDisableView(boolean disable) {
@@ -173,7 +174,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
+        progressDialog = new CustomProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
     @Override
@@ -189,7 +192,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     @Override
     public void hideProgress() {
         enableDisableView(false);
-        progressBar.setVisibility(View.INVISIBLE);
+        if (progressDialog != null && progressDialog.isShowing())
+            progressDialog.dismiss();
     }
 
 
