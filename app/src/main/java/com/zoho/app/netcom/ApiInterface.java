@@ -53,6 +53,9 @@ public interface ApiInterface {
     @POST("ForgotPassword")
     Call<BaseResponseModel> forgotPassword(@Body EmailViewModel emailViewModel);
 
+    @POST("Handshake")
+    Call<Object> handshake();
+
     @Multipart
     @POST("updateUserProfile")
     Call<LoginResponseModel> updateProfile(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,

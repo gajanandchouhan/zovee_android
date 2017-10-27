@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.itextpdf.tool.xml.svg.graphic.Text;
 import com.zoho.app.R;
 import com.zoho.app.activity.ChangePasswordActivity;
 import com.zoho.app.activity.LoginActivity;
 import com.zoho.app.activity.MainActivity;
+import com.zoho.app.activity.MyAccountActivity;
 import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.utils.DialogClickListnenr;
 import com.zoho.app.utils.Utils;
@@ -27,14 +29,16 @@ import com.zoho.app.utils.Utils;
 
 public class SettingFragment extends Fragment implements View.OnClickListener {
     private View view;
-    private TextView textViewChangePass,textViewLogout;
+    private TextView textViewChangePass, textViewLogout, textViewMyAccount;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_setting, container, false);
         textViewChangePass = (TextView) view.findViewById(R.id.text_change_password);
-        textViewLogout=(TextView)view.findViewById(R.id.textView_logout) ;
+        textViewLogout = (TextView) view.findViewById(R.id.textView_logout);
+        textViewMyAccount = (TextView) view.findViewById(R.id.textView_myaccount);
+        textViewMyAccount.setOnClickListener(this);
         textViewChangePass.setOnClickListener(this);
         textViewLogout.setOnClickListener(this);
         return view;
@@ -49,6 +53,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.textView_logout:
 
+                break;
+            case R.id.textView_myaccount:
+                Utils.startActivity(getActivity(), MyAccountActivity.class, null);
                 break;
         }
     }

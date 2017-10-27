@@ -222,7 +222,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
     public void onClick(int position) {
         mDrawerLayout.closeDrawer(layoutDrawer);
         String title = getDrawerItems().get(position).getTitle();
-        if (position == currentpos && currentpos != 2 && currentpos != 5) {
+       /* if (position == currentpos && currentpos != 2 && currentpos != 5) {
             return;
         }
         currentpos = position;
@@ -230,7 +230,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         if (position != 2 && position != 6) {
             adapter.setSelectedPosition(position);
             adapter.notifyDataSetChanged();
-        }
+        }*/
         switch (title) {
             case "Home":
                 toolbarTitle.setText(getString(R.string.app_name));
@@ -238,6 +238,8 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
                 backImageView.setVisibility(View.GONE);
                 pushFragments(new HomeFragment());
+                adapter.setSelectedPosition(position);
+                adapter.notifyDataSetChanged();
                 // myActionMenuItem.setVisible(true);
                 break;
             case "Help":
@@ -246,6 +248,8 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.help));
                 pushFragments(new AskQuestionFragment());
+                adapter.setSelectedPosition(position);
+                adapter.notifyDataSetChanged();
                 break;
             case "Share":
                 //  if (getCurrentFragment() instanceof HomeFragment)
@@ -258,6 +262,8 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.feedback));
                 pushFragments(new FeedbackFragment());
+                adapter.setSelectedPosition(position);
+                adapter.notifyDataSetChanged();
                 break;
             case "About Us":
                 actionBar.setDisplayHomeAsUpEnabled(false);
@@ -265,6 +271,8 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.about_us));
                 pushFragments(new AboutUsFragment());
+                adapter.setSelectedPosition(position);
+                adapter.notifyDataSetChanged();
                 break;
             case "Rate Us":
                 //if (getCurrentFragment() instanceof HomeFragment)
@@ -278,19 +286,17 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 backImageView.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(getString(R.string.dev_desk));
                 pushFragments(new DeveloperDeskFragment());
+                adapter.setSelectedPosition(position);
+                adapter.notifyDataSetChanged();
                 break;
             case "Setting":
-                int id = PrefManager.getInstance(this).getInt(PrefConstants.U_ID);
-                if (id != 0) {
                     actionBar.setDisplayHomeAsUpEnabled(false);
                     actionBar.setHomeAsUpIndicator(null);
                     backImageView.setVisibility(View.VISIBLE);
                     toolbarTitle.setText(getString(R.string.setting));
                     pushFragments(new SettingFragment());
-                } else {
-                    showAlert();
-                }
-
+                adapter.setSelectedPosition(position);
+                adapter.notifyDataSetChanged();
                 break;
             case "Logout":
                 Utils.showAlert(MainActivity.this, getString(R.string.logout_msg), new DialogClickListnenr() {
@@ -397,6 +403,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 currentpos = -1;
                 adapter.setSelectedPosition(-1);
                 pushFragments(new MyAccountFragment());
+                toolbarTitle.setText(getString(R.string.my_acnt));
                 mDrawerLayout.closeDrawer(layoutDrawer);
                 break;
             case R.id.search_imageView:

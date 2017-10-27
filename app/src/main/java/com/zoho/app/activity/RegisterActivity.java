@@ -181,7 +181,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void onRegister() {
-        Utils.showToast(this, "welcome " + nameEditText.getText().toString().trim());
+        Utils.showToast(this, "Welcome " + nameEditText.getText().toString().trim());
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

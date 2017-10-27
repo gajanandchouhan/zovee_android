@@ -46,6 +46,9 @@
             android:name=".activity.ShowMoreActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.MyAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity

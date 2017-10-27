@@ -31,6 +31,7 @@
         android:background="@color/text_color1" />
 
     <com.zoho.app.custom.RobotoRegularTextView
+        android:id="@+id/textView_myaccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_10sdp"
