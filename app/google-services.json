@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "625831639845-2v4uc03o9d98k9bld9m6rdhefoepa4gj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zovee.app",
+            "certificate_hash": "ea8891acf207f405f52d96b3045a2550c4b296be"
+          }
+        },
+        {
+          "client_id": "625831639845-6gbkh8jlr2te2ops9kqgbt03g77e36q5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zovee.app",
+            "certificate_hash": "7cab98f47d477471cea68d1c21b8ea45b1c80505"
+          }
+        },
+        {
           "client_id": "625831639845-h2os4p1gvd19cqv4pb21t68jie1nva91.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625831639845-h2os4p1gvd19cqv4pb21t68jie1nva91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

@@ -1,5 +1,6 @@
 package com.zoho.app.utils;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentUris;
@@ -48,8 +49,10 @@ public class Utils {
         Intent intent = new Intent(acivity, c);
         if (extras != null)
             intent.putExtras(extras);
-        if (clarTop)
+        if (clarTop){
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            ActivityCompat.finishAffinity((Activity) acivity);
+        }
         acivity.startActivity(intent);
     }
 

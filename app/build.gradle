@@ -15,10 +15,22 @@ android {
         // Enabling multidex support.
         multiDexEnabled true
     }
+
+    signingConfigs {
+        release {
+            storeFile file("D:\\Android\\Android Projects\\Current Projects\\ZohoApp\\zoho.jks")
+            storePassword "android"
+            keyAlias "zoho"
+            keyPassword "android"
+        }
+    }
+
     buildTypes {
         release {
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }

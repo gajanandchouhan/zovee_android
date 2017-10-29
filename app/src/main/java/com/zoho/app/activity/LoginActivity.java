@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            //    .requestIdToken("625831639845-2v4uc03o9d98k9bld9m6rdhefoepa4gj.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -181,6 +182,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
             doSoicialSignup(firstname, lastname, email, id, "3", PrefManager.getInstance(LoginActivity.this).getString(PrefConstants.DEVICE_TOKEN));
         }
+
     }
 
     private void doSoicialSignup(String firstname, String lastname, String email, String socialId, String type, String deviceToken) {
@@ -323,6 +325,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     public void onSkip(View view) {
         startActivity(new Intent(this, MainActivity.class));
+        ActivityCompat.finishAffinity(this);
+        finish();
     }
 
     public void onNewUser(View view) {
@@ -337,7 +341,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onRegister() {
-        Utils.startActivity(this, MainActivity.class, null);
+        Utils.startActivity(this, MainActivity.class, null,true);
+        finish();
     }
 
     @Override
