@@ -15,15 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "625831639845-2v4uc03o9d98k9bld9m6rdhefoepa4gj.apps.googleusercontent.com",
+          "client_id": "625831639845-ti50qtvkftdvm5g60amd7qef22g69fqr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.zovee.app",
-            "certificate_hash": "ea8891acf207f405f52d96b3045a2550c4b296be"
+            "certificate_hash": "b11663f427202e45caf3b2e6f03ef525bb22e59c"
           }
         },
         {
-          "client_id": "625831639845-6gbkh8jlr2te2ops9kqgbt03g77e36q5.apps.googleusercontent.com",
+          "client_id": "625831639845-q0v494hbbgmkoii1lrpfu01gns9oissb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.zovee.app",
