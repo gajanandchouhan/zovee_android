@@ -19,6 +19,7 @@ import com.zoho.app.activity.ChangePasswordActivity;
 import com.zoho.app.activity.LoginActivity;
 import com.zoho.app.activity.MainActivity;
 import com.zoho.app.activity.MyAccountActivity;
+import com.zoho.app.perisistance.PrefConstants;
 import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.utils.DialogClickListnenr;
 import com.zoho.app.utils.Utils;
@@ -41,6 +42,12 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         textViewMyAccount.setOnClickListener(this);
         textViewChangePass.setOnClickListener(this);
         textViewLogout.setOnClickListener(this);
+        if (PrefManager.getInstance(getActivity()).getString(PrefConstants.LOGIN_TYPE).equalsIgnoreCase("1")){
+            textViewChangePass.setVisibility(View.VISIBLE);
+        }
+        else{
+            textViewChangePass.setVisibility(View.GONE);
+        }
         return view;
     }
 

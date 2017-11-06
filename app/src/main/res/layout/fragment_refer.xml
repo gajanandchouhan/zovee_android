@@ -10,7 +10,7 @@
         android:id="@+id/et_que"
         android:maxLines="6"
         android:minLines="6"
-        style="@style/EditTextStyle"
+        style="@style/EditTextStyleRounded"
         android:layout_marginTop="@dimen/_20sdp"
         android:gravity="start"
         android:hint="@string/write_que"

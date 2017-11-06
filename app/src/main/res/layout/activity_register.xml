@@ -48,7 +48,12 @@
                 android:hint="@string/firstname"
                 android:inputType="textPersonName"
                 android:maxLines="1" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@color/colorPrimary" />
             <com.zoho.app.custom.RobotoRegularEditText
                 android:id="@+id/et_lastname"
                 style="@style/EditTextStyle"
@@ -56,6 +61,12 @@
                 android:hint="@string/lastname"
                 android:inputType="textPersonName"
                 android:maxLines="1" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@color/colorPrimary" />
 
             <com.zoho.app.custom.RobotoLightEditText
                 android:id="@+id/et_companyName"
@@ -65,6 +76,12 @@
                 android:imeOptions="actionNext"
                 android:inputType="textPersonName"
                 android:maxLines="1" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@color/colorPrimary" />
 
             <com.zoho.app.custom.RobotoLightEditText
                 android:id="@+id/et_email"
@@ -73,6 +90,12 @@
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@color/colorPrimary" />
 
             <com.zoho.app.custom.RobotoLightEditText
                 android:id="@+id/et_pass"
@@ -81,6 +104,12 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@color/colorPrimary" />
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -50,6 +51,7 @@ import com.zoho.app.view.RegisterView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -71,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private RegisterPresentor presentor;
     private CustomProgressDialog progressDialog;
     EditText emailEditText, passwordEditText;
-    private RelativeLayout buttonLogin;
+    private TextView buttonLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_login);
         bindViews();
         presentor = new RegisterPresentor(this, this);
-        buttonLogin = (RelativeLayout) findViewById(R.id.btn_login);
+        buttonLogin = (TextView) findViewById(R.id.btn_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -276,6 +278,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         PrefManager.getInstance(LoginActivity.this).putString(PrefConstants.EMAIL, responseData.getEmail());
                         PrefManager.getInstance(LoginActivity.this).putString(PrefConstants.IMAGE, responseData.getImageUrl());
                         PrefManager.getInstance(LoginActivity.this).putInt(PrefConstants.U_ID, responseData.getUserId());
+                        PrefManager.getInstance(LoginActivity.this).putString(PrefConstants.LOGIN_TYPE, "1");
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

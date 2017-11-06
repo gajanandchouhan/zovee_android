@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.Login;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.squareup.picasso.Picasso;
@@ -65,7 +66,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
     TextView charTextView;
     private RelativeLayout headerLayout;
 
-    ImageView imageViewFilter, imageViewNotification, imageViewSearch;
+    ImageView imageViewNotification, imageViewSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +99,11 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
         welcomeTextView = (TextView) findViewById(R.id.textView_welcome);
         layoutDrawer = (LinearLayout) findViewById(R.id.layout_drawer);
-        imageViewFilter = (ImageView) findViewById(R.id.filter_imageView);
+       // imageViewFilter = (ImageView) findViewById(R.id.filter_imageView);
         imageViewNotification = (ImageView) findViewById(R.id.notification_imageView);
         imageViewNotification.setVisibility(View.VISIBLE);
-        imageViewFilter.setVisibility(View.VISIBLE);
-        imageViewFilter.setOnClickListener(this);
+     //   imageViewFilter.setVisibility(View.VISIBLE);
+       // imageViewFilter.setOnClickListener(this);
         imageViewNotification.setOnClickListener(this);
         imageViewSearch.setOnClickListener(this);
         headerLayout.setOnClickListener(this);
@@ -114,6 +115,13 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         String name = PrefManager.getInstance(this).getString(PrefConstants.NAME); /*+ " " + PrefManager.getInstance(this).getString(PrefConstants.LASTNAME);*/
         if (name.length() == 0) {
             name = "Guest";
+            imageViewNotification.setVisibility(View.GONE);
+            findViewById(R.id.login_imageView).setVisibility(View.VISIBLE);
+            findViewById(R.id.login_imageView).setOnClickListener(this);
+        }
+        else{
+            imageViewNotification.setVisibility(View.VISIBLE);
+            findViewById(R.id.login_imageView).setVisibility(View.GONE);
         }
         name = name.substring(0, 1).toUpperCase() + name.substring(1);
         welcomeTextView.setText(String.format(getString(R.string.welcome_msg), name));
@@ -207,11 +215,11 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
     }
 
     public void pushFragments(Fragment fragment) {
-        if (fragment instanceof HomeFragment) {
+       /* if (fragment instanceof HomeFragment) {
             imageViewFilter.setVisibility(View.VISIBLE);
         } else {
             imageViewFilter.setVisibility(View.GONE);
-        }
+        }*/
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
         ft.replace(R.id.frame, fragment);
@@ -299,22 +307,23 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 adapter.notifyDataSetChanged();
                 break;
             case "Logout":
-                Utils.showAlert(MainActivity.this, getString(R.string.logout_msg), new DialogClickListnenr() {
+                PrefManager.getInstance(MainActivity.this).logout();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                ActivityCompat.finishAffinity(MainActivity.this);
+                finish();
+               /* Utils.showAlert(MainActivity.this, getString(R.string.logout_msg), new DialogClickListnenr() {
                     @Override
                     public void onOkClick() {
-                        PrefManager.getInstance(MainActivity.this).logout();
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        ActivityCompat.finishAffinity(MainActivity.this);
-                        finish();
+
                     }
 
                     @Override
                     public void onCancelClick() {
 
                     }
-                });
+                });*/
                 break;
         }
     }
@@ -388,12 +397,12 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.filter_imageView:
+            /*case R.id.filter_imageView:
                 Fragment currentFragment = getCurrentFragment();
                 if (currentFragment instanceof HomeFragment) {
                     ((HomeFragment) currentFragment).showFilter();
                 }
-                break;
+                break;*/
             case R.id.notification_imageView:
                 break;
             case R.id.header_layout:
@@ -408,6 +417,9 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 break;
             case R.id.search_imageView:
                 startActivity(new Intent(this, SearchActivity.class));
+                break;
+            case R.id.login_imageView:
+                startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
     }

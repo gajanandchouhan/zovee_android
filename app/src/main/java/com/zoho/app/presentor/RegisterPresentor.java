@@ -51,7 +51,7 @@ public class RegisterPresentor {
     }
 
     public void register(final String name, final String lastName, final String companyName, final String email, final File image,
-                         final String password, String deviceToken, String socialId, String type) {
+                         final String password, String deviceToken, String socialId, final String type) {
         if (!CheckNetworkState.isOnline(mContext)) {
             Utils.showToast(mContext, mContext.getString(R.string.no_internet));
             return;
@@ -138,6 +138,7 @@ public class RegisterPresentor {
                         PrefManager.getInstance(mContext).putString(PrefConstants.EMAIL, responseData.getEmail());
                         PrefManager.getInstance(mContext).putString(PrefConstants.IMAGE, responseData.getImageUrl());
                         PrefManager.getInstance(mContext).putInt(PrefConstants.U_ID, responseData.getUserId());
+                        PrefManager.getInstance(mContext).putString(PrefConstants.LOGIN_TYPE, type);
                         registerView.onRegister();
                     } else {
                         Utils.showToast(mContext, body1.getResponseMessage());

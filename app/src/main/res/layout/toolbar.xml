@@ -35,6 +35,16 @@
             android:textSize="@dimen/_14sdp" />
 
         <ImageView
+            android:id="@+id/login_imageView"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_gravity="right"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/power"
+            android:visibility="gone" />
+
+        <ImageView
             android:id="@+id/download_imageView"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
@@ -52,13 +62,6 @@
             android:src="@drawable/bell"
             android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/filter_imageView"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_gravity="right"
-            android:src="@drawable/filter"
-            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/search_imageView"

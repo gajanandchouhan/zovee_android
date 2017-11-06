@@ -13,4 +13,5 @@ public interface PrefConstants {
     String DEVICE_TOKEN = "device_token";
     String U_ID = "u_id";
     String IMAGE = "img";
+    String LOGIN_TYPE = "login_type";
 }

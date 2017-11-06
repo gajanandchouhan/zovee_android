@@ -23,11 +23,20 @@
         <item name="android:padding">@dimen/_10sdp</item>
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="android:textColor">@color/text_color1</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginLeft">@dimen/_20sdp</item>
+        <item name="android:layout_marginRight">@dimen/_20sdp</item>
+    </style>
+    <style name="EditTextStyleRounded" parent="Base.V7.Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="android:textColor">@color/text_color1</item>
         <item name="android:background">@drawable/editext_bg</item>
         <item name="android:layout_marginLeft">@dimen/_20sdp</item>
         <item name="android:layout_marginRight">@dimen/_20sdp</item>
     </style>
-
     <style name="ButtonStyle" parent="Base.Widget.AppCompat.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/_35sdp</item>
