@@ -58,9 +58,13 @@ public class FilterDialog extends Dialog {
             }
         }
         else{
-            for (CategoryModel model : categoryList) {
-                model.setSelected(true);
+            if (!PrefManager.getInstance(mContext).getBoolean("isfirst")) {
+                for (CategoryModel model : categoryList) {
+                    model.setSelected(true);
+                }
+                PrefManager.getInstance(mContext).putBoolean("isfirst",true);
             }
+
         }
         adapterAdapter = new FilterCategoryAdapterAdapter(mContext, categoryList);
         recyclerView.setAdapter(adapterAdapter);
@@ -83,6 +87,9 @@ public class FilterDialog extends Dialog {
                     }
                 }
                 listner.onCategorySelected(selectedList);
+                if (selectedList.size()==0){
+                    Utils.showToast(mContext,mContext.getString(R.string.selecr_filter_msg));
+                }
                 dismiss();
 
 

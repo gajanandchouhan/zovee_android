@@ -84,4 +84,12 @@ public class PrefManager implements PrefConstants {
         putString(IMAGE, "");
         putInt(PrefConstants.U_ID, 0);
     }
+
+    public void putBoolean(String key, boolean b) {
+        sharedPreferences.edit().putBoolean(key, b).commit();
+    }
+
+    public boolean getBoolean(String key) {
+        return sharedPreferences.getBoolean(key, false);
+    }
 }

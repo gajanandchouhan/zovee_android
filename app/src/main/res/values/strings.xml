@@ -73,4 +73,6 @@
     <string name="learn_zovee">Learn Zoho by video</string>
     <string name="logout">Logout</string>
     <string name="my_acnt">My Account</string>
+    <string name="filter">Filter</string>
+    <string name="selecr_filter_msg">Please select at least one category.</string>
 </resources>

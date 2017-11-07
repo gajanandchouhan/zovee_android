@@ -22,10 +22,10 @@ public class DetailsPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return new DescriptionFragment();
-            case 1:
+          /*  case 1:
                 return new LikesFragment();
             case 2:
-                return new CommentsFragment();
+                return new CommentsFragment();*/
         }
         return null;
     }
@@ -33,7 +33,7 @@ public class DetailsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 1;
     }
 
 
@@ -42,10 +42,10 @@ public class DetailsPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return "Description";
-            case 1:
+           /* case 1:
                 return "Likes";
             case 2:
-                return "Comments";
+                return "Comments";*/
         }
         return "";
     }
