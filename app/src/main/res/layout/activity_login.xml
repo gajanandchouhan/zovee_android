@@ -75,7 +75,6 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
-            android:onClick="onForgot"
             android:text="@string/forgot_pass"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_14sdp" />
@@ -180,7 +179,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:onClick="onSkip"
             android:padding="@dimen/_10sdp"
             android:text="@string/skip"
             android:textColor="@color/white"
@@ -197,7 +195,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:onClick="onNewUser"
             android:padding="@dimen/_10sdp"
             android:text="@string/signup"
             android:textColor="@color/white"

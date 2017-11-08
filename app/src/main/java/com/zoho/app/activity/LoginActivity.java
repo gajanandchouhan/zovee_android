@@ -107,11 +107,31 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
+        findViewById(R.id.textView_skip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               onSkip(v);
+            }
+        });
 
+
+        findViewById(R.id.textView_signin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               onNewUser(v);
+            }
+        });
         findViewById(R.id.btn_google).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
+            }
+        });
+
+        findViewById(R.id.textView_forgot_pass).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onForgot(v);
             }
         });
     }

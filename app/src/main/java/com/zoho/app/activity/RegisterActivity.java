@@ -84,7 +84,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         companyNameEditText = (EditText) findViewById(R.id.et_companyName);
         passEditText = (EditText) findViewById(R.id.et_pass);
         emailEditText = (EditText) findViewById(R.id.et_email);
-        findViewById(R.id.textView_title).setVisibility(View.GONE);
         cameraImageView = (ImageView) findViewById(R.id.camera);
         profileImageView = (ImageView) findViewById(R.id.imageView);
         backImageView = (ImageView) findViewById(R.id.back_imageView);

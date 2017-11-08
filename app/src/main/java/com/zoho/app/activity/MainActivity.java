@@ -80,6 +80,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         setAdapter();
         pushFragments(new HomeFragment());
+        findViewById(R.id.textView_title).setVisibility(View.GONE);
     }
 
     private void setAdapter() {

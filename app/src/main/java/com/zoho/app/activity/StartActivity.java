@@ -18,13 +18,23 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        findViewById(R.id.textView_skip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StartActivity.this, MainActivity.class));
+                finish();
+            }
+        });
+
+
+        findViewById(R.id.textView_signin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StartActivity.this, LoginActivity.class));;
+            }
+        });
     }
 
-    public void onSkip(View view) {
-        startActivity(new Intent(this, MainActivity.class));
-    }
 
-    public void onSignin(View view) {
-        startActivity(new Intent(this, LoginActivity.class));
-    }
 }
