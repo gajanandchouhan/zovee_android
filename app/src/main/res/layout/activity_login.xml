@@ -37,7 +37,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/colorPrimary" />
+            android:background="@color/light_gray" />
 
         <com.zoho.app.custom.RobotoLightEditText
             android:id="@+id/et_pass"
@@ -55,7 +55,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/colorPrimary" />
+            android:background="@color/light_gray" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,22 +68,12 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:orientation="horizontal">
 
-        <com.zoho.app.custom.RobotoMediumTextView
-            android:id="@+id/textView_forgot_pass"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:gravity="left|center_vertical"
-            android:text="@string/forgot_pass"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/_14sdp" />
+
 
         <com.zoho.app.custom.RobotoRegularTextView
             android:id="@+id/btn_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_20sdp"
             android:layout_weight="1"
             android:background="@drawable/button_bg"
             android:gravity="center"
@@ -106,12 +96,22 @@
                android:visibility="invisible" />-->
     </LinearLayout>
 
-
+    <com.zoho.app.custom.RobotoMediumTextView
+        android:id="@+id/textView_forgot_pass"
+        android:layout_below="@+id/layout_forgot"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="@string/forgot_pass"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_14sdp" />
     <RelativeLayout
         android:id="@+id/btn_facebook"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
-        android:layout_below="@+id/layout_forgot"
+        android:layout_below="@+id/textView_forgot_pass"
         android:layout_marginLeft="@dimen/_50sdp"
         android:layout_marginRight="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_40sdp"

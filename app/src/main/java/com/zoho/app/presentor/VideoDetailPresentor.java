@@ -30,7 +30,7 @@ public class VideoDetailPresentor {
         this.videoListView = videoListView;
     }
 
-    public void getVideoDetails(int id) {
+    public void getVideoDetails(long id) {
         IdViewModel idViewModel=new IdViewModel();
         idViewModel.setId(id);
         videoListView.showProgress();

@@ -5,13 +5,13 @@ package com.zoho.app.model.request;
  */
 
 public class IdViewModel {
-    private int Id;
+    private Long Id;
 
-    public void setId(int id) {
+    public void setId(Long id) {
         Id = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return Id;
     }
 }

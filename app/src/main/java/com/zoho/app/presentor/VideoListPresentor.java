@@ -30,7 +30,7 @@ public class VideoListPresentor {
         this.videoListView = videoListView;
     }
 
-    public void getVideoList(int id) {
+    public void getVideoList(long id) {
         if (!CheckNetworkState.isOnline(mContext)) {
             Utils.showToast(mContext, mContext.getString(R.string.no_internet));
             return;

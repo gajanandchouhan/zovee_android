@@ -3,6 +3,7 @@ package com.zoho.app.activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,8 +47,6 @@ public class SearchActivity extends AppCompatActivity implements VideoListView {
     private VideoListPresentor presentor;
 
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +69,7 @@ public class SearchActivity extends AppCompatActivity implements VideoListView {
     }
 
     private void setAdapter(List<VideoListModel> list) {
-        adapter = new VideoListAdapter(this, list,false);
+        adapter = new VideoListAdapter(this, list, false);
         mRecyclerView.setAdapter(adapter);
     }
 
@@ -150,6 +149,22 @@ public class SearchActivity extends AppCompatActivity implements VideoListView {
                 return false;
             }
         });
+        MenuItemCompat.setOnActionExpandListener(myActionMenuItem,
+                new MenuItemCompat.OnActionExpandListener() {
+                    @Override
+                    public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                        // Return true to allow the action view to expand
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+                        // When the action view is collapsed, reset the query
+                        finish();
+                        // Return true to allow the action view to collapse
+                        return true;
+                    }
+                });
         return true;
     }
 
