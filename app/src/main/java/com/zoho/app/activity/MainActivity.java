@@ -150,14 +150,14 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         drawerItemList.add(new DrawerItem(getString(R.string.share), R.drawable.share_selector));
        // drawerItemList.add(new DrawerItem(getString(R.string.feedback), R.drawable.feedback_selector));
         if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
-            drawerItemList.add(new DrawerItem(getString(R.string.setting), R.drawable.feedback_selector));
+            drawerItemList.add(new DrawerItem(getString(R.string.setting), R.drawable.setting_selector));
         }
-        drawerItemList.add(new DrawerItem(getString(R.string.filter), R.drawable.about_selector));
+        drawerItemList.add(new DrawerItem(getString(R.string.filter), R.drawable.filter_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.about_us), R.drawable.about_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.rate_us), R.drawable.rate_selector));
      //   drawerItemList.add(new DrawerItem(getString(R.string.dev_desk), R.drawable.developer_desk_selector));
         if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
-            drawerItemList.add(new DrawerItem(getString(R.string.logout), R.drawable.feedback_selector));
+            drawerItemList.add(new DrawerItem(getString(R.string.logout), R.drawable.logout_selector));
         }
         return drawerItemList;
     }
