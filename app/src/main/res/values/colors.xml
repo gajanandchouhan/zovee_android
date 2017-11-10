@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#C61B1B</color>
-    <color name="colorPrimaryDark">#C61B1B</color>
+    <color name="colorPrimaryDark">#A52A2A</color>
     <color name="colorAccent">#C61B1B</color>
     <color name="splash_bg">#006DF0</color>
     <color name="text_color1">#585858</color>
     <color name="white">#FFFFFF</color>
     <color name="blue">#1164D3</color>
     <color name="semi_trans">#4D000000</color>
+    <color name="light_gray">@android:color/darker_gray</color>
 </resources>

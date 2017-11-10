@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/_10sdp">
 
-        <com.zoho.app.custom.RobotoRegularTextView
+        <com.zoho.app.custom.RobotoMediumTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -27,10 +27,10 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/text_color1" />
+        android:layout_height="0.1dp"
+        android:background="@color/light_gray" />
 
-    <com.zoho.app.custom.RobotoRegularTextView
+    <com.zoho.app.custom.RobotoMediumTextView
         android:id="@+id/textView_myaccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,10 +41,10 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/text_color1" />
+        android:layout_height="0.1dp"
+        android:background="@color/light_gray" />
 
-    <com.zoho.app.custom.RobotoRegularTextView
+    <com.zoho.app.custom.RobotoMediumTextView
         android:id="@+id/text_change_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,8 +55,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/text_color1" />
+        android:layout_height="0.1dp"
+        android:background="@color/light_gray" />
 
     <com.zoho.app.custom.RobotoRegularTextView
         android:id="@+id/textView_logout"
@@ -71,6 +71,6 @@
     <View
         android:layout_width="match_parent"
         android:visibility="gone"
-        android:layout_height="0.5dp"
-        android:background="@color/text_color1" />
+        android:layout_height="0.1dp"
+        android:background="@color/light_gray" />
 </LinearLayout>

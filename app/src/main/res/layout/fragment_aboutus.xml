@@ -1,51 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fillViewport="true">
 
-    <com.zoho.app.custom.RobotoMediumTextView
-        android:id="@+id/textview"
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="@dimen/_20sdp"
-        android:text="ZoVee for Android"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/_22sdp" />
+        android:orientation="vertical">
 
-    <com.zoho.app.custom.RobotoRegularTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/_20sdp"
-        android:text="Version"
-        android:textColor="@color/text_color1"
-        android:textSize="@dimen/_18sdp" />
+        <com.zoho.app.custom.RobotoMediumTextView
+            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/_20sdp"
+            android:text="ZoVee for Android"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_22sdp" />
 
-    <com.zoho.app.custom.RobotoRegularTextView
-        android:id="@+id/textView_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/_20sdp"
-        android:paddingTop="@dimen/_10sdp"
-        android:text="Version"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/_18sdp" />
+        <com.zoho.app.custom.RobotoRegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_20sdp"
+            android:text="Version"
+            android:textColor="@color/text_color1"
+            android:textSize="@dimen/_18sdp" />
 
-    <com.zoho.app.custom.RobotoRegularTextView
-        android:id="@+id/textView_content_about"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_40sdp"
-        android:paddingLeft="@dimen/_20sdp"
-        android:text="@string/about_msg"
-        android:textSize="@dimen/_18sdp" />
+        <com.zoho.app.custom.RobotoRegularTextView
+            android:id="@+id/textView_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_20sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:text="Version"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_18sdp" />
 
-    <com.zoho.app.custom.RobotoRegularTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_40sdp"
-        android:paddingLeft="@dimen/_20sdp"
-        android:text="All right reserves."
-        android:textSize="@dimen/_18sdp" />
-</LinearLayout>
+        <com.zoho.app.custom.RobotoRegularTextView
+            android:id="@+id/textView_content_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:paddingLeft="@dimen/_20sdp"
+            android:text="@string/about_msg"
+            android:textSize="@dimen/_18sdp" />
+
+        <com.zoho.app.custom.RobotoRegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:paddingLeft="@dimen/_20sdp"
+            android:text="All right reserves."
+            android:textSize="@dimen/_18sdp" />
+
+        <com.zoho.app.custom.RobotoRegularTextView
+            android:id="@+id/textView_developer_desk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/developer_desk_content"
+            android:textColor="@color/text_color1"
+            android:textSize="@dimen/_14sdp" />
+    </LinearLayout>
+</ScrollView>

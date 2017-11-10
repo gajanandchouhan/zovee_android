@@ -148,14 +148,14 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         drawerItemList.add(new DrawerItem(getString(R.string.home), R.drawable.home_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.help), R.drawable.help_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.share), R.drawable.share_selector));
-        drawerItemList.add(new DrawerItem(getString(R.string.feedback), R.drawable.feedback_selector));
+       // drawerItemList.add(new DrawerItem(getString(R.string.feedback), R.drawable.feedback_selector));
         if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
             drawerItemList.add(new DrawerItem(getString(R.string.setting), R.drawable.feedback_selector));
         }
         drawerItemList.add(new DrawerItem(getString(R.string.filter), R.drawable.about_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.about_us), R.drawable.about_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.rate_us), R.drawable.rate_selector));
-        drawerItemList.add(new DrawerItem(getString(R.string.dev_desk), R.drawable.developer_desk_selector));
+     //   drawerItemList.add(new DrawerItem(getString(R.string.dev_desk), R.drawable.developer_desk_selector));
         if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
             drawerItemList.add(new DrawerItem(getString(R.string.logout), R.drawable.feedback_selector));
         }
@@ -226,6 +226,12 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         FragmentTransaction ft = manager.beginTransaction();
         ft.replace(R.id.frame, fragment);
         ft.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshImage();
     }
 
     @Override
@@ -432,9 +438,11 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         }
     }
 
-    public void refreshImage() {
+    private void refreshImage() {
         String img = PrefManager.getInstance(this).getString(PrefConstants.IMAGE);
-        Picasso.with(this).load(img).into(profileImageView);
-        charTextView.setVisibility(View.GONE);
+        if (img!=null&&img.length()>0) {
+            Picasso.with(this).load(img).into(profileImageView);
+            charTextView.setVisibility(View.GONE);
+        }
     }
 }
