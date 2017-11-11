@@ -2,6 +2,7 @@ package com.zoho.app.netcom;
 
 import com.zoho.app.model.request.ChangePasswordRequestModel;
 import com.zoho.app.model.request.EmailViewModel;
+import com.zoho.app.model.request.HelpRequestModel;
 import com.zoho.app.model.request.IdViewModel;
 import com.zoho.app.model.request.LoginRequestModel;
 import com.zoho.app.model.response.BaseResponseModel;
@@ -61,6 +62,6 @@ public interface ApiInterface {
     Call<LoginResponseModel> updateProfile(@Part("FirstName") RequestBody fName, @Part("LastName") RequestBody lName,
                                            @Part("UserId") RequestBody uid,
                                            @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file);
-
-
+    @POST("help")
+    Call<BaseResponseModel> sendHelp(@Body HelpRequestModel model);
 }

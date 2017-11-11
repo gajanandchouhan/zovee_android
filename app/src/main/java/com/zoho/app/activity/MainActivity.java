@@ -259,13 +259,18 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 // myActionMenuItem.setVisible(true);
                 break;
             case "Help":
-                actionBar.setDisplayHomeAsUpEnabled(false);
-                actionBar.setHomeAsUpIndicator(null);
-                backImageView.setVisibility(View.VISIBLE);
-                toolbarTitle.setText(getString(R.string.help));
-                pushFragments(new AskQuestionFragment());
-                adapter.setSelectedPosition(position);
-                adapter.notifyDataSetChanged();
+                if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID)!=0) {
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                    actionBar.setHomeAsUpIndicator(null);
+                    backImageView.setVisibility(View.VISIBLE);
+                    toolbarTitle.setText(getString(R.string.help));
+                    pushFragments(new AskQuestionFragment());
+                    adapter.setSelectedPosition(position);
+                    adapter.notifyDataSetChanged();
+                }
+                else{
+                    Utils.showToast(this,"First you have to login, to get any help from ZoVee team.");
+                }
                 break;
             case "Share":
                 //  if (getCurrentFragment() instanceof HomeFragment)

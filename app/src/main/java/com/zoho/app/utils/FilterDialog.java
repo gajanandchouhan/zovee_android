@@ -89,6 +89,7 @@ public class FilterDialog extends Dialog {
                 listner.onCategorySelected(selectedList);
                 if (selectedList.size()==0){
                     Utils.showToast(mContext,mContext.getString(R.string.selecr_filter_msg));
+                    return;
                 }
                 dismiss();
 

@@ -13,6 +13,9 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.zoho.app.R;
 import com.zoho.app.activity.MainActivity;
+import com.zoho.app.perisistance.PrefConstants;
+import com.zoho.app.perisistance.PrefManager;
+import com.zoho.app.utils.ConstantLib;
 
 /**
  * Created by hp on 29-09-2017.
@@ -25,13 +28,15 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        //It is optional
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-        Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+        if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID)!=0)
+        {
+            Log.d(TAG, "From: " + remoteMessage.getFrom());
+            Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
 
-        //Calling method to generate notification
-        sendNotification(remoteMessage.getNotification().getBody());
-        sendNotification(remoteMessage.getNotification().getBody());
+            //Calling method to generate notification
+            sendNotification(remoteMessage.getNotification().getBody());
+        }        //It is optional
+
     }
     private void sendNotification(String messageBody) {
         Intent intent = new Intent(this, MainActivity.class);
