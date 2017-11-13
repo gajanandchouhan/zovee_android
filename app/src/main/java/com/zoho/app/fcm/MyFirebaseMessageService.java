@@ -1,5 +1,6 @@
 package com.zoho.app.fcm;
 
+import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -18,6 +19,11 @@ import com.zoho.app.perisistance.PrefConstants;
 import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.utils.ConstantLib;
 
+import java.util.Map;
+
+import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
+import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE;
+
 /**
  * Created by hp on 29-09-2017.
  */
@@ -30,16 +36,19 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
-            Log.d(TAG, "From: " + remoteMessage.getFrom());
-            Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+            if (!foregrounded()) {
+                Log.d(TAG, "From: " + remoteMessage.getFrom());
+                Log.d(TAG, "Notification Message Body: " + remoteMessage.getData().toString());
 
-            //Calling method to generate notification
-            sendNotification(remoteMessage.getNotification().getBody());
-        }        //It is optional
+                //Calling method to generate notification
+
+                sendNotification(remoteMessage.getData());
+            }        //It is optional
+        }
 
     }
 
-    private void sendNotification(String messageBody) {
+    private void sendNotification(Map<String, String> messageBody) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
@@ -53,8 +62,8 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
         } else {
             notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
         }
-        notificationBuilder.setContentTitle("Firebase Push Notification");
-        notificationBuilder.setContentText(messageBody);
+        notificationBuilder.setContentTitle(getString(R.string.app_name));
+        notificationBuilder.setContentText(messageBody.get("msg"));
         notificationBuilder.setAutoCancel(true);
         notificationBuilder.setSound(defaultSoundUri);
         notificationBuilder.setContentIntent(pendingIntent);
@@ -63,5 +72,11 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, notificationBuilder.build());
+    }
+
+    public boolean foregrounded() {
+        ActivityManager.RunningAppProcessInfo appProcessInfo = new ActivityManager.RunningAppProcessInfo();
+        ActivityManager.getMyMemoryState(appProcessInfo);
+        return (appProcessInfo.importance == IMPORTANCE_FOREGROUND || appProcessInfo.importance == IMPORTANCE_VISIBLE);
     }
 }

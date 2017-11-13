@@ -9,7 +9,7 @@
     <com.wang.avi.AVLoadingIndicatorView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:indicatorColor="@color/text_color1"
+        app:indicatorColor="@color/black"
         app:indicatorName="BallSpinFadeLoaderIndicator" />
     <!--<ProgressBar
         android:id="@+id/loading"

@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/_13sdp"
+            android:textSize="@dimen/_16sdp"
             android:text="Login with email" />
 
         <com.zoho.app.custom.RobotoLightEditText
@@ -36,7 +36,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="0.1dp"
             android:background="@color/light_gray" />
 
         <com.zoho.app.custom.RobotoLightEditText
@@ -54,7 +54,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="0.1dp"
             android:background="@color/light_gray" />
     </LinearLayout>
 
@@ -182,7 +182,7 @@
             android:padding="@dimen/_10sdp"
             android:text="@string/skip"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_16sdp" />
 
         <View
             android:layout_width="0.1dp"
@@ -198,6 +198,6 @@
             android:padding="@dimen/_10sdp"
             android:text="@string/signup"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_16sdp" />
     </LinearLayout>
 </RelativeLayout>

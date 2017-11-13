@@ -5,17 +5,16 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.zoho.app.custom.RobotoMediumTextView
+    <com.zoho.app.custom.CovesRegularTextView
         android:id="@+id/textView_labellogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_30sdp"
         android:gravity="center"
         android:padding="@dimen/_10sdp"
         android:text="@string/app_name"
         android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/_25sdp" />
+        android:textSize="@dimen/_50sdp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -23,18 +22,15 @@
         android:layout_height="@dimen/_200sdp"
         android:layout_below="@+id/textView_labellogo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_30sdp"
         android:scaleType="fitXY"
         android:src="@drawable/play_white" />
 
-    <com.zoho.app.custom.RobotoMediumTextView
+    <com.zoho.app.custom.RobotoRegularTextView
         android:layout_width="wrap_content"
+        android:layout_below="@+id/imageView"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_layout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_30sdp"
         android:gravity="center"
-        android:layout_marginBottom="@dimen/_40sdp"
         android:padding="@dimen/_10sdp"
         android:text="@string/learn_zovee"
         android:textColor="@color/colorPrimary"
@@ -57,7 +53,7 @@
             android:padding="@dimen/_10sdp"
             android:text="@string/skip"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_16sdp" />
 
         <View
             android:layout_width="0.1dp"
@@ -73,7 +69,7 @@
             android:padding="@dimen/_10sdp"
             android:text="@string/signin"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_16sdp" />
     </LinearLayout>
 
 </RelativeLayout>

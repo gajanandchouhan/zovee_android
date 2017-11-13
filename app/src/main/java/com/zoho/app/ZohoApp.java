@@ -1,6 +1,7 @@
 package com.zoho.app;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.google.android.gms.ads.MobileAds;
 
@@ -8,7 +9,7 @@ import com.google.android.gms.ads.MobileAds;
  * Created by hp on 26-05-2017.
  */
 
-public class ZohoApp extends Application {
+public class ZohoApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
