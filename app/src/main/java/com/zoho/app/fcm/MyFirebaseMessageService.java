@@ -15,6 +15,8 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.zoho.app.R;
 import com.zoho.app.activity.MainActivity;
+import com.zoho.app.activity.NotificationActivity;
+import com.zoho.app.perisistance.DBHelper;
 import com.zoho.app.perisistance.PrefConstants;
 import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.utils.ConstantLib;
@@ -39,9 +41,7 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
             if (!foregrounded()) {
                 Log.d(TAG, "From: " + remoteMessage.getFrom());
                 Log.d(TAG, "Notification Message Body: " + remoteMessage.getData().toString());
-
                 //Calling method to generate notification
-
                 sendNotification(remoteMessage.getData());
             }        //It is optional
         }
@@ -49,11 +49,25 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
     }
 
     private void sendNotification(Map<String, String> messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
+        String title = messageBody.get("title");
+        String message = messageBody.get("message");
+        int subCategoryId = Integer.parseInt(messageBody.get("subCategoryId"));
+        String subCategoryName = messageBody.get("subCategoryName");
+        String subCategoryDescription = messageBody.get("subCategoryDescription");
+        String subCategoryThumbUrl = messageBody.get("subCategoryThumbURL");
+        NotificationDataModel model = new NotificationDataModel();
+        model.setTitle(title);
+        model.setMessage(message);
+        model.setSubCategoryId(subCategoryId);
+        model.setSubCategoryDescription(subCategoryDescription);
+        model.setSubcategoryName(subCategoryName);
+        model.setSubCategoryThumbUrl(subCategoryThumbUrl);
+        DBHelper.getInstance(this).insertNotificationToDb(model);
+        NotificationActivity.FROM_NOTFICATION=true;
+        Intent intent = new Intent(this, NotificationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
-
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -62,8 +76,8 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
         } else {
             notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
         }
-        notificationBuilder.setContentTitle(getString(R.string.app_name));
-        notificationBuilder.setContentText(messageBody.get("msg"));
+        notificationBuilder.setContentTitle(title);
+        notificationBuilder.setContentText(message);
         notificationBuilder.setAutoCancel(true);
         notificationBuilder.setSound(defaultSoundUri);
         notificationBuilder.setContentIntent(pendingIntent);

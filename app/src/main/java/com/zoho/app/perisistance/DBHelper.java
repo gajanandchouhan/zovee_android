@@ -3,6 +3,7 @@ package com.zoho.app.perisistance;
 import android.content.Context;
 
 
+import com.zoho.app.fcm.NotificationDataModel;
 import com.zoho.app.model.response.DaoMaster;
 import com.zoho.app.model.response.DaoSession;
 import com.zoho.app.model.response.SubCategoryModel;
@@ -32,24 +33,17 @@ public class DBHelper {
         return instance;
     }
 
-    public void insertOrReplaceSubCaetgoryModel(SubCategoryModel subCategoryModel) {
-      /*  daoSession.getSu.deleteAll();
-        int count = 0;
-        for (ContactResponseModel contactResponseModel : contactResponseModels) {
-            String mobile = "243545455" + count;
-            contactResponseModel.getPhoneData().setMobile(mobile);
-            long insertId = daoSession.getPhoneModelDao().insert(contactResponseModel.getPhoneData());
-            count++;
-            contactResponseModel.setPhone_id(insertId);
-            daoSession.getContactResponseModelDao().insert(contactResponseModel);
-        }*/
-        daoSession.getSubCategoryModelDao().insertOrReplace(subCategoryModel);
+    public void insertNotificationToDb(NotificationDataModel notificationDataModel) {
+        daoSession.getNotificationDataModelDao().insert(notificationDataModel);
 
     }
 
-    public List<SubCategoryModel> getSubcategoryList() {
-        return daoSession.getSubCategoryModelDao().loadAll();
+    public List<NotificationDataModel> getNotificationData() {
+        return daoSession.getNotificationDataModelDao().loadAll();
     }
 
 
+    public void clearNotifications() {
+        daoSession.getNotificationDataModelDao().deleteAll();
+    }
 }

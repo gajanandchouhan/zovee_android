@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            //    .requestIdToken("625831639845-2v4uc03o9d98k9bld9m6rdhefoepa4gj.apps.googleusercontent.com")
+                //    .requestIdToken("625831639845-2v4uc03o9d98k9bld9m6rdhefoepa4gj.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         findViewById(R.id.textView_skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onSkip(v);
+                onSkip(v);
             }
         });
 
@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         findViewById(R.id.textView_signin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onNewUser(v);
+                onNewUser(v);
             }
         });
         findViewById(R.id.btn_google).setOnClickListener(new View.OnClickListener() {
@@ -282,6 +282,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         LoginRequestModel model = new LoginRequestModel();
         model.setEmail(email);
         model.setPassword(password);
+        model.setDeviceToken(PrefManager.getInstance(this).getString(PrefConstants.DEVICE_TOKEN));
         Call<LoginResponseModel> loginResponseModelCall = ApiClient.getApiInterface().doLogin(model);
         loginResponseModelCall.enqueue(new Callback<LoginResponseModel>() {
             @Override
@@ -364,7 +365,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onRegister() {
-        Utils.startActivity(this, MainActivity.class, null,true);
+        Utils.startActivity(this, MainActivity.class, null, true);
         finish();
     }
 

@@ -100,11 +100,11 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
         welcomeTextView = (TextView) findViewById(R.id.textView_welcome);
         layoutDrawer = (LinearLayout) findViewById(R.id.layout_drawer);
-       // imageViewFilter = (ImageView) findViewById(R.id.filter_imageView);
+        // imageViewFilter = (ImageView) findViewById(R.id.filter_imageView);
         imageViewNotification = (ImageView) findViewById(R.id.notification_imageView);
         imageViewNotification.setVisibility(View.VISIBLE);
-     //   imageViewFilter.setVisibility(View.VISIBLE);
-       // imageViewFilter.setOnClickListener(this);
+        //   imageViewFilter.setVisibility(View.VISIBLE);
+        // imageViewFilter.setOnClickListener(this);
         imageViewNotification.setOnClickListener(this);
         imageViewSearch.setOnClickListener(this);
         headerLayout.setOnClickListener(this);
@@ -119,8 +119,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
             imageViewNotification.setVisibility(View.GONE);
             findViewById(R.id.login_imageView).setVisibility(View.VISIBLE);
             findViewById(R.id.login_imageView).setOnClickListener(this);
-        }
-        else{
+        } else {
             imageViewNotification.setVisibility(View.VISIBLE);
             findViewById(R.id.login_imageView).setVisibility(View.GONE);
         }
@@ -148,14 +147,14 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         drawerItemList.add(new DrawerItem(getString(R.string.home), R.drawable.home_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.help), R.drawable.help_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.share), R.drawable.share_selector));
-       // drawerItemList.add(new DrawerItem(getString(R.string.feedback), R.drawable.feedback_selector));
+        // drawerItemList.add(new DrawerItem(getString(R.string.feedback), R.drawable.feedback_selector));
         if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
             drawerItemList.add(new DrawerItem(getString(R.string.setting), R.drawable.setting_selector));
         }
         drawerItemList.add(new DrawerItem(getString(R.string.filter), R.drawable.filter_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.about_us), R.drawable.about_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.rate_us), R.drawable.rate_selector));
-     //   drawerItemList.add(new DrawerItem(getString(R.string.dev_desk), R.drawable.developer_desk_selector));
+        //   drawerItemList.add(new DrawerItem(getString(R.string.dev_desk), R.drawable.developer_desk_selector));
         if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
             drawerItemList.add(new DrawerItem(getString(R.string.logout), R.drawable.logout_selector));
         }
@@ -259,7 +258,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 // myActionMenuItem.setVisible(true);
                 break;
             case "Help":
-                if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID)!=0) {
+                if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
                     actionBar.setDisplayHomeAsUpEnabled(false);
                     actionBar.setHomeAsUpIndicator(null);
                     backImageView.setVisibility(View.VISIBLE);
@@ -267,9 +266,8 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                     pushFragments(new AskQuestionFragment());
                     adapter.setSelectedPosition(position);
                     adapter.notifyDataSetChanged();
-                }
-                else{
-                    Utils.showToast(this,"First you have to login, to get any help from ZoVee team.");
+                } else {
+                    Utils.showToast(this, "First you have to login, to get any help from ZoVee team.");
                 }
                 break;
             case "Share":
@@ -311,11 +309,11 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 adapter.notifyDataSetChanged();
                 break;
             case "Setting":
-                    actionBar.setDisplayHomeAsUpEnabled(false);
-                    actionBar.setHomeAsUpIndicator(null);
-                    backImageView.setVisibility(View.VISIBLE);
-                    toolbarTitle.setText(getString(R.string.setting));
-                    pushFragments(new SettingFragment());
+                actionBar.setDisplayHomeAsUpEnabled(false);
+                actionBar.setHomeAsUpIndicator(null);
+                backImageView.setVisibility(View.VISIBLE);
+                toolbarTitle.setText(getString(R.string.setting));
+                pushFragments(new SettingFragment());
                 adapter.setSelectedPosition(position);
                 adapter.notifyDataSetChanged();
                 break;
@@ -423,6 +421,8 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
                 }
                 break;*/
             case R.id.notification_imageView:
+                NotificationActivity.FROM_NOTFICATION = false;
+                Utils.startActivity(this, NotificationActivity.class, null);
                 break;
             case R.id.header_layout:
                 if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) == 0) {
@@ -445,7 +445,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
 
     private void refreshImage() {
         String img = PrefManager.getInstance(this).getString(PrefConstants.IMAGE);
-        if (img!=null&&img.length()>0) {
+        if (img != null && img.length() > 0) {
             Picasso.with(this).load(img).into(profileImageView);
             charTextView.setVisibility(View.GONE);
         }

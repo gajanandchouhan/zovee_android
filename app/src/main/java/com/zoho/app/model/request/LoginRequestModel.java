@@ -7,6 +7,15 @@ package com.zoho.app.model.request;
 public class LoginRequestModel {
     private String Email;
     private String Password;
+    private String DeviceToken;
+
+    public void setDeviceToken(String deviceToken) {
+        DeviceToken = deviceToken;
+    }
+
+    public String getDeviceToken() {
+        return DeviceToken;
+    }
 
     public String getEmail() {
         return Email;
