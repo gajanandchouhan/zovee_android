@@ -1,5 +1,7 @@
 package com.zoho.app.netcom;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -26,6 +28,8 @@ public class ApiClient {
 // add your other interceptors …
 
 // add logging as last interceptor
+            httpClient.connectTimeout(1, TimeUnit.MINUTES);
+            httpClient.readTimeout(1, TimeUnit.MINUTES);
             httpClient.addInterceptor(logging);  // <-- this is the important line!
             client = new Retrofit.Builder()
                     .baseUrl(BASE_URL)

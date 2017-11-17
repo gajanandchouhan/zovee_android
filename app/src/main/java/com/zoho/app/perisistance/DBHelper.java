@@ -3,9 +3,9 @@ package com.zoho.app.perisistance;
 import android.content.Context;
 
 
+import com.zoho.app.fcm.DaoMaster;
+import com.zoho.app.fcm.DaoSession;
 import com.zoho.app.fcm.NotificationDataModel;
-import com.zoho.app.model.response.DaoMaster;
-import com.zoho.app.model.response.DaoSession;
 import com.zoho.app.model.response.SubCategoryModel;
 
 import org.greenrobot.greendao.database.Database;

@@ -4,12 +4,12 @@ repositories {
   //  maven { url "https://jitpack.io" }
 }
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.zovee.app"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 2
         versionName "1.0.1"
         // Enabling multidex support.
@@ -18,7 +18,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("D:\\Android\\Android Projects\\Current Projects\\ZohoApp\\zoho.jks")
+            storeFile file("/home/gajanand/Work Room/Project/Current Projects/zovee_android/zoho.jks")
             storePassword "android"
             keyAlias "zoho"
             keyPassword "android"
