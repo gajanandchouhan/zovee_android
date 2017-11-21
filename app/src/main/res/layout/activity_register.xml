@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -57,7 +57,7 @@
             <com.zoho.app.custom.RobotoRegularEditText
                 android:id="@+id/et_lastname"
                 style="@style/EditTextStyle"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:hint="@string/lastname"
                 android:inputType="textPersonName"
                 android:maxLines="1" />
@@ -71,7 +71,7 @@
             <com.zoho.app.custom.RobotoLightEditText
                 android:id="@+id/et_companyName"
                 style="@style/EditTextStyle"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:hint="@string/companyName"
                 android:imeOptions="actionNext"
                 android:inputType="textPersonName"
@@ -86,7 +86,7 @@
             <com.zoho.app.custom.RobotoLightEditText
                 android:id="@+id/et_email"
                 style="@style/EditTextStyle"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1" />
@@ -100,7 +100,7 @@
             <com.zoho.app.custom.RobotoLightEditText
                 android:id="@+id/et_pass"
                 style="@style/EditTextStyle"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1" />

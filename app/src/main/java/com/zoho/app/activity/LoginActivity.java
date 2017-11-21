@@ -57,6 +57,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.nio.channels.FileChannel;
 import java.util.Arrays;
 
@@ -74,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private CustomProgressDialog progressDialog;
     EditText emailEditText, passwordEditText;
     private TextView buttonLogin;
+    private int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -319,8 +321,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onFailure(Call<LoginResponseModel> call, Throwable t) {
                 t.printStackTrace();
                 enableDisableView(false);
-                dismisProgress();
-                Utils.showToast(LoginActivity.this, getString(R.string.server_error));
+                if (count==0&&t !=null&&t instanceof SocketTimeoutException){
+                    count=count+1;
+                    login();
+                }
+                else{
+                    dismisProgress();
+                    Utils.showToast(LoginActivity.this, getString(R.string.server_error));
+                }
+
             }
         });
     }

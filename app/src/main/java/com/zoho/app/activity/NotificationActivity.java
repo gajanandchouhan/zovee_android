@@ -31,6 +31,7 @@ import com.zoho.app.perisistance.DBHelper;
 import com.zoho.app.utils.ConstantLib;
 
 import java.lang.reflect.Field;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -70,6 +71,7 @@ public class NotificationActivity extends BaseActivity {
             @Override
             protected Void doInBackground(Void... params) {
                 list = DBHelper.getInstance(NotificationActivity.this).getNotificationData();
+                Collections.reverse(list);
                 return null;
             }
 
@@ -117,8 +119,15 @@ public class NotificationActivity extends BaseActivity {
     }
 
     private void setAdapter(List<NotificationDataModel> notificationDataModels) {
-        adapter = new NotificationListAdapter(this, notificationDataModels);
-        mRecyclerView.setAdapter(adapter);
+        if (notificationDataModels != null && notificationDataModels.size() > 0) {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            findViewById(R.id.textView_nodata).setVisibility(View.GONE);
+            adapter = new NotificationListAdapter(this, notificationDataModels);
+            mRecyclerView.setAdapter(adapter);
+        } else {
+            mRecyclerView.setVisibility(View.GONE);
+            findViewById(R.id.textView_nodata).setVisibility(View.VISIBLE);
+        }
     }
 
     private void bindView() {

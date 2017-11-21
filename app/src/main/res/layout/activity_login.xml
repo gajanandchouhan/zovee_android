@@ -17,9 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:text="Login with email"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/_16sdp"
-            android:text="Login with email" />
+            android:textSize="@dimen/_16sdp" />
 
         <com.zoho.app.custom.RobotoLightEditText
             android:id="@+id/et_email"
@@ -43,7 +43,7 @@
             android:id="@+id/et_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@android:color/transparent"
             android:hint="@string/password"
             android:inputType="textPassword"
@@ -67,7 +67,6 @@
         android:layout_marginRight="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:orientation="horizontal">
-
 
 
         <com.zoho.app.custom.RobotoRegularTextView
@@ -98,23 +97,62 @@
 
     <com.zoho.app.custom.RobotoMediumTextView
         android:id="@+id/textView_forgot_pass"
-        android:layout_below="@+id/layout_forgot"
         android:layout_width="wrap_content"
-        android:padding="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_forgot"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:padding="@dimen/_10sdp"
         android:text="@string/forgot_pass"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_14sdp" />
+
+    <RelativeLayout
+        android:id="@+id/layout_devider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_forgot_pass"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textView_or"
+            android:layout_toStartOf="@+id/textView_or"
+            android:background="@color/light_gray" />
+
+        <com.zoho.app.custom.RobotoRegularTextView
+            android:id="@+id/textView_or"
+            android:layout_width="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="OR"
+            android:textColor="@color/text_color1"
+            android:textSize="@dimen/_14sdp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/textView_or"
+            android:layout_toRightOf="@+id/textView_or"
+            android:background="@color/light_gray" />
+    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/btn_facebook"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
-        android:layout_below="@+id/textView_forgot_pass"
+        android:layout_below="@+id/layout_devider"
         android:layout_marginLeft="@dimen/_50sdp"
         android:layout_marginRight="@dimen/_50sdp"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/blue_button_bg">
 
         <com.zoho.app.custom.RobotoMediumTextView
@@ -137,7 +175,7 @@
         android:layout_below="@+id/btn_facebook"
         android:layout_marginLeft="@dimen/_50sdp"
         android:layout_marginRight="@dimen/_50sdp"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/button_bg">
 
         <com.zoho.app.custom.RobotoMediumTextView

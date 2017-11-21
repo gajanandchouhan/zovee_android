@@ -18,14 +18,17 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="@dimen/_180sdp"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:layout_height="@dimen/_250sdp"
+        android:scaleType="fitXY"
         android:layout_below="@+id/textView_labellogo"
         android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
         android:src="@drawable/play_white" />
 
     <com.zoho.app.custom.RobotoRegularTextView
+        android:id="@+id/textView_label"
         android:layout_width="wrap_content"
         android:layout_below="@+id/imageView"
         android:layout_height="wrap_content"
@@ -35,7 +38,15 @@
         android:text="@string/learn_zovee"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_20sdp" />
-
+    <com.zoho.app.custom.RobotoRegularTextView
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/textView_label"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/learn_zovee"
+        android:textColor="@color/text_color1"
+        android:textSize="@dimen/_13sdp" />
     <LinearLayout
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"

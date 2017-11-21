@@ -11,6 +11,8 @@ import com.zoho.app.utils.ConstantLib;
 import com.zoho.app.utils.Utils;
 import com.zoho.app.view.HomeView;
 
+import java.net.SocketTimeoutException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,6 +24,7 @@ import retrofit2.Response;
 public class HomePresentor {
     private Context mContext;
     private HomeView homeView;
+    private int count = 0;
 
     public HomePresentor(Context mContext, HomeView homeView) {
         this.mContext = mContext;
@@ -54,8 +57,13 @@ public class HomePresentor {
 
             @Override
             public void onFailure(Call<CategoryResponseModel> call, Throwable t) {
-                homeView.hideProgress();
-                Utils.showToast(mContext, mContext.getString(R.string.server_error));
+                if (count == 0 && t != null && t instanceof SocketTimeoutException) {
+                    count = count + 1;
+                    getCategories();
+                } else {
+                    homeView.hideProgress();
+                    Utils.showToast(mContext, mContext.getString(R.string.server_error));
+                }
                 t.printStackTrace();
             }
         });

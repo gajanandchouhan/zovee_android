@@ -25,6 +25,7 @@ import com.zoho.app.view.RegisterView;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -44,6 +45,7 @@ public class RegisterPresentor {
     private final Context mContext;
     private RegisterView registerView;
     private String responseString;
+    private int count=0;
 
     public RegisterPresentor(RegisterView view, Context mContext) {
         registerView = view;
@@ -51,7 +53,7 @@ public class RegisterPresentor {
     }
 
     public void register(final String name, final String lastName, final String companyName, final String email, final File image,
-                         final String password, String deviceToken, String socialId, final String type) {
+                         final String password, final String deviceToken, final String socialId, final String type) {
         if (!CheckNetworkState.isOnline(mContext)) {
             Utils.showToast(mContext, mContext.getString(R.string.no_internet));
             return;
@@ -98,7 +100,7 @@ public class RegisterPresentor {
             body = MultipartBody.Part.createFormData("ProfilePicture", image != null ? image.getName() : "", requestFile);
         }
 // add another part within the multipart request
-        RequestBody fName =
+        final RequestBody fName =
                 RequestBody.create(
                         MediaType.parse("text/plain"), name);
         RequestBody lName =
@@ -151,8 +153,15 @@ public class RegisterPresentor {
             @Override
             public void onFailure(Call<LoginResponseModel> call, Throwable t) {
                 t.printStackTrace();
-                registerView.hideProgress();
-                Utils.showToast(mContext, mContext.getString(R.string.server_error));
+                if (count==0&&t !=null&&t instanceof SocketTimeoutException){
+                    count=count+1;
+                    register(name, lastName, companyName, email, image, password, deviceToken, socialId, type);
+                }
+                else{
+                    registerView.hideProgress();
+                    Utils.showToast(mContext, mContext.getString(R.string.server_error));
+                }
+
             }
         });
 /*
@@ -212,6 +221,7 @@ public class RegisterPresentor {
             multipart = new MultipartUtility("http://zohotrainingtest.infobyd.com/webser/Service1.svc/signUp", "utf-8");
             multipart.addFormField("FirstName", fName);
             multipart.addFormField("LastName", lName);
+            multipart.addFormField("Email", email);
             multipart.addFormField("Email", email);
             multipart.addFormField("CompanyName", comapnay);
             multipart.addFormField("Password", password);
