@@ -1,16 +1,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
     <!-- Irrelevant stuff -->
+    <com.zoho.app.custom.RobotoRegularTextView
+        android:id="@+id/textView_nodata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_16sdp"
+        android:text="No videos found."
+        android:textColor="@color/text_color1"
+        android:textSize="@dimen/_16sdp"
+        android:visibility="gone" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
     <!-- Must be last for right layering display -->
 

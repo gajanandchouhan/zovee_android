@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zoho.app.R;
+import com.zoho.app.activity.SearchActivity;
 import com.zoho.app.activity.VideoDetailsActivity;
 import com.zoho.app.model.response.VideoListModel;
 import com.zoho.app.utils.ConstantLib;
@@ -123,6 +124,14 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Cust
         protected void publishResults(CharSequence constraint, FilterResults results) {
             filteredList = (ArrayList<VideoListModel>) results.values;
             notifyDataSetChanged();
+            if (!isFromList){
+                if (results.count>0) {
+                    ((SearchActivity) mContext).setNoDataVisibile(View.GONE);
+                }
+                else{
+                    ((SearchActivity) mContext).setNoDataVisibile(View.VISIBLE);
+                }
+            }
         }
 
     }

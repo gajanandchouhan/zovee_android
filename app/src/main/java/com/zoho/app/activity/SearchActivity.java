@@ -168,4 +168,7 @@ public class SearchActivity extends AppCompatActivity implements VideoListView {
         return true;
     }
 
+    public void setNoDataVisibile(int gone) {
+        findViewById(R.id.textView_nodata).setVisibility(gone);
+    }
 }
