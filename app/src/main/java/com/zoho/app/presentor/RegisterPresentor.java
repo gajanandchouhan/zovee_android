@@ -141,6 +141,7 @@ public class RegisterPresentor {
                         PrefManager.getInstance(mContext).putString(PrefConstants.IMAGE, responseData.getImageUrl());
                         PrefManager.getInstance(mContext).putInt(PrefConstants.U_ID, responseData.getUserId());
                         PrefManager.getInstance(mContext).putString(PrefConstants.LOGIN_TYPE, type);
+                        PrefManager.getInstance(mContext).putInt(PrefConstants.NOTIFICATION_STATUS, responseData.getNotification());
                         registerView.onRegister();
                     } else {
                         Utils.showToast(mContext, body1.getResponseMessage());

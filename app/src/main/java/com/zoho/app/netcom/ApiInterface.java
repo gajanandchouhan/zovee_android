@@ -5,6 +5,7 @@ import com.zoho.app.model.request.EmailViewModel;
 import com.zoho.app.model.request.HelpRequestModel;
 import com.zoho.app.model.request.IdViewModel;
 import com.zoho.app.model.request.LoginRequestModel;
+import com.zoho.app.model.request.NotificationStatusModel;
 import com.zoho.app.model.response.BaseResponseModel;
 import com.zoho.app.model.response.CategoryResponseModel;
 import com.zoho.app.model.response.LoginResponseModel;
@@ -64,4 +65,7 @@ public interface ApiInterface {
                                            @Part("CompanyName") RequestBody companyName, @Part MultipartBody.Part file);
     @POST("help")
     Call<BaseResponseModel> sendHelp(@Body HelpRequestModel model);
+
+    @POST("setNotification")
+    Call<BaseResponseModel> setNotification(@Body NotificationStatusModel model);
 }

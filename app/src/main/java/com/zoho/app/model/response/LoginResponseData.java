@@ -11,6 +11,15 @@ public class LoginResponseData {
     private String Email;
     private String CompanyName;
     private String ImageUrl;
+    private int Notification;
+
+    public void setNotification(int notification) {
+        Notification = notification;
+    }
+
+    public int getNotification() {
+        return Notification;
+    }
 
     public int getUserId() {
         return UserId;

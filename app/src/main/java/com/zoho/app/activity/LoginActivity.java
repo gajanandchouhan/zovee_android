@@ -302,6 +302,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         PrefManager.getInstance(LoginActivity.this).putString(PrefConstants.IMAGE, responseData.getImageUrl());
                         PrefManager.getInstance(LoginActivity.this).putInt(PrefConstants.U_ID, responseData.getUserId());
                         PrefManager.getInstance(LoginActivity.this).putString(PrefConstants.LOGIN_TYPE, "1");
+                        PrefManager.getInstance(LoginActivity.this).putInt(PrefConstants.NOTIFICATION_STATUS, responseData.getNotification());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

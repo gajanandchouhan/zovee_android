@@ -14,4 +14,5 @@ public interface PrefConstants {
     String U_ID = "u_id";
     String IMAGE = "img";
     String LOGIN_TYPE = "login_type";
+    String NOTIFICATION_STATUS = "not_status";
 }
