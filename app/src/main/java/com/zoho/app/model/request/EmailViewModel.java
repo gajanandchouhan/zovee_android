@@ -5,13 +5,13 @@ package com.zoho.app.model.request;
  */
 
 public class EmailViewModel {
-    private String Email;
+    private String EmailId;
 
     public void setEmail(String email) {
-        Email = email;
+        EmailId = email;
     }
 
     public String getEmail() {
-        return Email;
+        return EmailId;
     }
 }

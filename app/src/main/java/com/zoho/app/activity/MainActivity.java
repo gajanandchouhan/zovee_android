@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         if (name.length() == 0) {
             name = "Guest";
             imageViewNotification.setVisibility(View.GONE);
-            findViewById(R.id.login_imageView).setVisibility(View.VISIBLE);
+            findViewById(R.id.login_imageView).setVisibility(View.GONE);
             findViewById(R.id.login_imageView).setOnClickListener(this);
         } else {
             imageViewNotification.setVisibility(View.VISIBLE);
@@ -155,9 +155,9 @@ public class MainActivity extends BaseActivity implements DrawerAdapter.DrawerCl
         drawerItemList.add(new DrawerItem(getString(R.string.rate_us), R.drawable.rate_selector));
         drawerItemList.add(new DrawerItem(getString(R.string.about_us), R.drawable.about_selector));
         //   drawerItemList.add(new DrawerItem(getString(R.string.dev_desk), R.drawable.developer_desk_selector));
-        if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
+       /* if (PrefManager.getInstance(this).getInt(PrefConstants.U_ID) != 0) {
             drawerItemList.add(new DrawerItem(getString(R.string.logout), R.drawable.logout_selector));
-        }
+        }*/
         return drawerItemList;
     }
 

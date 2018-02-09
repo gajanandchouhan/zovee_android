@@ -137,10 +137,10 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             return;
         }
 
-        if (password.length() == 0) {
+       /* if (password.length() == 0) {
             emailEditText.setError(getString(R.string.enter_password));
             return;
-        }
+        }*/
        /* if (userImageFile == null) {
             Utils.showToast(this, getString(R.string.select_image));
             return;
