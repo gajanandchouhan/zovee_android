@@ -4,7 +4,7 @@
     <string name="mobileNum">Mobile Number</string>
     <string name="companyName">Company Name</string>
     <string name="email">Email</string>
-    <string name="get_started">Sign Up</string>
+    <string name="get_started">Get Started</string>
     <string name="please_wait">Please wait…</string>
     <string name="name_empty">Please enter name.</string>
     <string name="mobile_empty">Please enter mobile number.</string>
