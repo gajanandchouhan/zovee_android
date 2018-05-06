@@ -24,7 +24,6 @@ import android.widget.RelativeLayout;
 
 import com.squareup.picasso.Picasso;
 import com.zoho.app.R;
-import com.zoho.app.activity.RegisterActivity;
 import com.zoho.app.custom.CustomProgressDialog;
 import com.zoho.app.model.response.LoginResponseData;
 import com.zoho.app.model.response.LoginResponseModel;
@@ -45,7 +44,6 @@ import java.nio.channels.FileChannel;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -200,6 +198,7 @@ public class MyAccountFragment extends Fragment {
                         PrefManager.getInstance(mContext).putString(PrefConstants.IMAGE, responseData.getImageUrl());
                         PrefManager.getInstance(mContext).putInt(PrefConstants.U_ID, responseData.getUserId());
                         setView();
+                        getActivity().onBackPressed();
                     }
                     Utils.showToast(getActivity(), body1.getResponseMessage());
                 } else {

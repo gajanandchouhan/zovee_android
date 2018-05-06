@@ -1,28 +1,22 @@
 package com.zoho.app.fragment;
 
-import android.Manifest;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.os.AsyncTaskCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.common.api.PendingResult;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
-import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.gson.Gson;
 import com.zoho.app.R;
 import com.zoho.app.adapter.DetailsPagerAdapter;
@@ -87,7 +81,7 @@ public class DetailsFragment extends Fragment {
         }
         final String url = "https://www.googleapis.com/youtube/v3/videos?id=" + videoListModel.getYoutubeId() + "&key=" + ConstantLib.DEVELOPER_KEY + "&fields=items(id,snippet(description,channelId,title,categoryId),statistics)&part=snippet,statistics";
         //  new VideoDetailPresentor(this, this).getVideoDetails(videoListModel.getVideoId());
-        AsyncTaskCompat.executeParallel(new AsyncTask<Object, Object, String>() {
+       new AsyncTask<Object, Object, String>() {
             CustomProgressDialog progressDialog;
 
             @Override
@@ -157,7 +151,7 @@ public class DetailsFragment extends Fragment {
 
                 super.onPostExecute(o);
             }
-        });
+        }.execute();
     }
 
     private void initializePlayer() {

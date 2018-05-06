@@ -1,17 +1,11 @@
 package com.zoho.app.presentor;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Debug;
-import android.support.v4.os.AsyncTaskCompat;
 import android.util.Log;
 
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
-import com.google.gson.Gson;
 import com.zoho.app.R;
 import com.zoho.app.model.response.LoginResponseData;
 import com.zoho.app.model.response.LoginResponseModel;
-import com.zoho.app.model.response.SignupResponseModel;
 import com.zoho.app.netcom.ApiClient;
 import com.zoho.app.netcom.ApiInterface;
 import com.zoho.app.netcom.CheckNetworkState;
@@ -19,7 +13,6 @@ import com.zoho.app.netcom.MultipartUtility;
 import com.zoho.app.perisistance.PrefConstants;
 import com.zoho.app.perisistance.PrefManager;
 import com.zoho.app.utils.ConstantLib;
-import com.zoho.app.utils.MailConstant;
 import com.zoho.app.utils.Utils;
 import com.zoho.app.view.RegisterView;
 

@@ -1,6 +1,7 @@
 package com.zoho.app.fcm;
 
 import android.app.ActivityManager;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -14,12 +15,10 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.zoho.app.R;
-import com.zoho.app.activity.MainActivity;
 import com.zoho.app.activity.NotificationActivity;
 import com.zoho.app.perisistance.DBHelper;
 import com.zoho.app.perisistance.PrefConstants;
 import com.zoho.app.perisistance.PrefManager;
-import com.zoho.app.utils.ConstantLib;
 
 import java.util.Map;
 
@@ -63,13 +62,13 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
         model.setSubcategoryName(subCategoryName);
         model.setSubCategoryThumbUrl(subCategoryThumbUrl);
         DBHelper.getInstance(this).insertNotificationToDb(model);
-        NotificationActivity.FROM_NOTFICATION=true;
+        NotificationActivity.FROM_NOTFICATION = true;
         Intent intent = new Intent(this, NotificationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,"zovee_channel_01");
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             notificationBuilder.setColor(getColor(R.color.text_color1));
             notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
@@ -84,7 +83,14 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
+      /* Create or update. */
+            NotificationChannel channel = new NotificationChannel("zovee_channel_01",
+                    "Video",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
         notificationManager.notify(0, notificationBuilder.build());
     }
 

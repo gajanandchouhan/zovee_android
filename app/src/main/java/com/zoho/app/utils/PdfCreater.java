@@ -1,26 +1,19 @@
 package com.zoho.app.utils;
 
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
-import android.support.v4.os.AsyncTaskCompat;
 
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.zoho.app.R;
 import com.zoho.app.custom.CustomProgressDialog;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.OutputStream;
 
 
@@ -29,7 +22,7 @@ public class PdfCreater {
     public static void createPdf(final Context mContext, final String htmlString, final String fileName) {
         final CustomProgressDialog dialogHandler = new CustomProgressDialog(mContext);
         dialogHandler.show();
-        AsyncTaskCompat.executeParallel(new AsyncTask<Object, Object, File>() {
+        new AsyncTask<Object, Object, File>() {
             @Override
             protected File doInBackground(Object... objects) {
                 File vellopayDirs = null;
@@ -68,7 +61,7 @@ public class PdfCreater {
                     Utils.showToast(mContext, mContext.getString(R.string.can_not_saved));
                 }
             }
-        });
+        }.execute();
     }
 
 

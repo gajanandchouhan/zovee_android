@@ -2,35 +2,24 @@ package com.zoho.app.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.os.AsyncTaskCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zoho.app.R;
 import com.zoho.app.adapter.NotificationListAdapter;
-import com.zoho.app.adapter.ShowMoreAdapter;
 import com.zoho.app.custom.CustomProgressDialog;
 import com.zoho.app.fcm.NotificationDataModel;
-import com.zoho.app.model.response.CategoryModel;
-import com.zoho.app.model.response.SubCategoryModel;
 import com.zoho.app.perisistance.DBHelper;
-import com.zoho.app.utils.ConstantLib;
 
-import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
 
@@ -57,7 +46,7 @@ public class NotificationActivity extends BaseActivity {
         bindView();
         titleTextView.setText(getString(R.string.notifications));
 
-        AsyncTaskCompat.executeParallel(new AsyncTask<Void, Void, Void>() {
+       new AsyncTask<Void, Void, Void>() {
             CustomProgressDialog progressDialog;
 
 
@@ -82,7 +71,7 @@ public class NotificationActivity extends BaseActivity {
                 progressDialog.dismiss();
             }
 
-        });
+        }.execute();
         backImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
