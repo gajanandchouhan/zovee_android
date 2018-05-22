@@ -1,6 +1,5 @@
 package com.zoho.app.fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.zoho.app.R;
 import com.zoho.app.activity.MainActivity;
 import com.zoho.app.custom.CustomProgressDialog;
@@ -58,7 +56,7 @@ public class FeedbackFragment extends Fragment {
         PrefManager instance = PrefManager.getInstance(getActivity());
         String user = instance.getString(PrefConstants.NAME) + " " + instance.getString(PrefConstants.LASTNAME);
         String email = instance.getString(PrefConstants.EMAIL);
-        BackgroundMail.newBuilder(getActivity())
+        /*BackgroundMail.newBuilder(getActivity())
                 .withUsername(MailConstant.USER_ID)
                 .withPassword(MailConstant.PASSWORD)
                 .withMailto(MailConstant.TO_ID)
@@ -83,7 +81,7 @@ public class FeedbackFragment extends Fragment {
                         Utils.showToast(getActivity(), getString(R.string.error));
                     }
                 })
-                .send();
+                .send();*/
     }
 
 }

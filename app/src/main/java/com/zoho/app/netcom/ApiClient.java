@@ -14,8 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private static Retrofit client;
     //http://zovee.infobyd.com/
-    private static final String BASE_URL = "http://zohotrainingtest.infobyd.com/webser/Service1.svc/";
-    // private static final String BASE_URL = "http://zovee.infobyd.com/webser/Service1.svc/";
+//    private static final String BASE_URL = "http://zohotrainingtest.infobyd.com/webser/Service1.svc/";
+     private static final String BASE_URL = "http://zovee.infobyd.com/webser/Service1.svc/";
     private static ApiInterface apiInterface;
 
     public static Retrofit getClient() {

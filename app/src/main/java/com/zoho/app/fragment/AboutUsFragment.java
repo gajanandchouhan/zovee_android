@@ -1,26 +1,18 @@
 package com.zoho.app.fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.zoho.app.R;
-import com.zoho.app.netcom.CheckNetworkState;
-import com.zoho.app.utils.ConstantLib;
-import com.zoho.app.utils.MailConstant;
 import com.zoho.app.utils.Utils;
 
 /**

@@ -1,6 +1,5 @@
 package com.zoho.app.fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.zoho.app.R;
-import com.zoho.app.activity.MainActivity;
 import com.zoho.app.custom.CustomProgressDialog;
 import com.zoho.app.model.request.HelpRequestModel;
 import com.zoho.app.model.response.BaseResponseModel;
@@ -20,8 +17,6 @@ import com.zoho.app.netcom.ApiClient;
 import com.zoho.app.netcom.CheckNetworkState;
 import com.zoho.app.perisistance.PrefConstants;
 import com.zoho.app.perisistance.PrefManager;
-import com.zoho.app.utils.ConstantLib;
-import com.zoho.app.utils.MailConstant;
 import com.zoho.app.utils.Utils;
 
 import retrofit2.Call;
